@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/model/dto/CustomerDTO.java</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/web/request.jsp</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/web/requestComplete.jsp</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/web/homepage.jsp</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/utils/DBUtils.java</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/web/requestWaiting.jsp</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/web/css/homepage.css</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/model/dao/AccountDAO.java</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/model/dto/OwnerDTO.java</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/model/dto/ManagerDTO.java</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/web/login.jsp</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/controllers/CreateController.java</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/model/dto/AccountDTO.java</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/filter/AuthenticationFilter.java</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/controllers/MainController.java</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/controllers/LoginController.java</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/web/register.jsp</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/web/menu.jsp</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/lehan/Downloads/Project1/Project1/src/java/project/controllers/LogoutController.java</file>
+        </group>
+    </open-files>
+</project-private>

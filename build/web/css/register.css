@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 12, 2025, 2:21:15 PM
+    Author     : Khanh
+*/
+.container  {
+  margin: 0;
+  height: 100vh; /* toàn màn hình */
+  display: flex;
+  justify-content: flex; /* căn sang phải */
+  align-items: center;       /* căn giữa theo chiều dọc */
+  background-color: white;
+  font-family: Arial, sans-serif;
+}
+input {
+    padding: 10px;
+    width: 250px;
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+}
+
+input[type="submit"] {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+.image-box {
+  float: left;
+  width: 700px;
+  height: 700px;
+  background-image: url('../images/image1.png');
+  background-size: cover;
+  margin-right: 20px;
+}
+
