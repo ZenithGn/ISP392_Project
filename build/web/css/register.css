@@ -8,13 +8,16 @@ and open the template in the editor.
     Author     : Khanh
 */
 .container  {
-  margin: 0;
-  height: 100vh; /* toàn màn hình */
-  display: flex;
-  justify-content: flex; /* căn sang phải */
-  align-items: center;       /* căn giữa theo chiều dọc */
-  background-color: white;
-  font-family: Arial, sans-serif;
+background-image: url('../images/register123.png'); /* Đường dẫn đến ảnh */
+    background-size: cover;           /* Ảnh sẽ phủ toàn bộ trang */
+    background-position: center;      /* Canh giữa */
+    background-repeat: no-repeat;     /* Không lặp lại */
+    height: 100vh;                    /* Chiều cao 100% màn hình */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: lime;
+    justify-content: center;
 }
 input {
     padding: 10px;
@@ -36,12 +39,10 @@ input[type="submit"] {
   border-radius: 5px;
 }
 
-.image-box {
-  float: left;
-  width: 700px;
-  height: 700px;
-  background-image: url('../images/image1.png');
-  background-size: cover;
-  margin-right: 20px;
+
+
+input::placeholder {
+  color: gray;
+  font-style: italic;
 }
 

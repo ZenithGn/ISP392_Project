@@ -124,7 +124,7 @@
                     <% } else { %>
                         <a href="login.jsp">Login</a>
                     <% } %>
-                    <a href="#">Service</a>
+                    <a href="menu.jsp">Service</a>
                     <a href="#">About Us</a>
                     <a href="#" class="active">Home</a>
                 </nav>
@@ -222,12 +222,12 @@
                                 <div class="dashboard-card">
                                     <h4>🆘 Yêu cầu cứu hộ</h4>
                                     <p>Đặt dịch vụ cứu hộ khẩn cấp</p>
-                                    <a href="customer/request-rescue">Yêu cầu ngay</a>
+                                    <a href="request.jsp">Yêu cầu ngay</a>
                                 </div>
                                 <div class="dashboard-card">
                                     <h4>📋 Đơn hàng của tôi</h4>
                                     <p>Theo dõi trạng thái các yêu cầu</p>
-                                    <a href="customer/my-orders">Xem đơn hàng</a>
+                                    <a href="requestWaiting.jsp">Xem đơn hàng</a>
                                 </div>
                                 <div class="dashboard-card">
                                     <h4>💳 Thanh toán</h4>
@@ -262,7 +262,7 @@
                 <h2>Các dịch vụ của chúng tôi</h2>
                 <div class="service-grid">
                     <div class="service-card">
-                        <img src="images/keo-xe.jpg" alt="Kéo xe" />
+                        <img src="images/keo-xe2.jpg" alt="Kéo xe" />
                         <p class="service-title">Kéo xe</p>
                         <% if ("customer".equals(userRole)) { %>
                             <p class="service-desc">Dịch vụ kéo xe chuyên nghiệp 24/7</p>

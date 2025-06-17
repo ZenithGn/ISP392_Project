@@ -9,9 +9,15 @@ and open the template in the editor.
 */
 
 body {
-    background-color: yellow;
+    background-image: url('../images/login.png'); 
+    background-size: cover;           
+    background-position: center;      
+    background-repeat: no-repeat;     
+    height: 100vh;                    
+    margin: 0;
     font-family: Arial, sans-serif;
     text-align: center;
+    color: white
 }
 input {
     padding: 10px;
@@ -30,5 +36,14 @@ input[type="submit"] {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
+}
+
+a{
+    color:white
+}
+
+input::placeholder {
+  color: gray;
+  font-style: italic;
 }
 

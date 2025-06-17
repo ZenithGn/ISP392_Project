@@ -27,8 +27,8 @@
             <% } %>
 
             <form action="MainController" method="POST">
-                Phone:<input type="text" name="phone" required/><br>
-                Password:<input type="password" name="password" required/><br>
+                <input type="text" name="phone" required placeholder="Phone"/> <br>
+                <input type="password" name="password" required placeholder="Password"/><br>
 
                 <p>Chưa có tài khoản?  <a href="register.jsp">Đăng ký</a></p>
                 <br><input type="submit" name="action" value="Login"/>
