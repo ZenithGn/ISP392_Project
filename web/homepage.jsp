@@ -31,89 +31,15 @@
         <title>MRS - Dịch vụ cứu hộ xe máy</title>
         <link rel="stylesheet" href="css/homepage.css" />
         <style>
-            .user-info {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            .role-badge {
-                padding: 4px 8px;
-                border-radius: 12px;
-                font-size: 12px;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-            .role-owner { background-color: #ff6b6b; color: white; }
-            .role-manager { background-color: #4ecdc4; color: white; }
-            .role-employee { background-color: #45b7d1; color: white; }
-            .role-customer { background-color: #96ceb4; color: white; }
-            .logout-btn {
-                background-color: #ff4757;
-                color: white;
-                border: none;
-                padding: 8px 15px;
-                border-radius: 4px;
-                cursor: pointer;
-                text-decoration: none;
-                font-size: 14px;
-            }
-            .logout-btn:hover {
-                background-color: #ff3742;
-            }
-            .role-specific-content {
-                margin: 20px 0;
-                padding: 20px;
-                border-radius: 8px;
-                background-color: #f8f9fa;
-            }
-            .admin-panel {
-                background-color: #e3f2fd;
-                border-left: 4px solid #2196f3;
-            }
-            .manager-panel {
-                background-color: #f3e5f5;
-                border-left: 4px solid #9c27b0;
-            }
-            .employee-panel {
-                background-color: #e8f5e8;
-                border-left: 4px solid #4caf50;
-            }
-            .customer-panel {
-                background-color: #fff3e0;
-                border-left: 4px solid #ff9800;
-            }
-            .dashboard-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 15px;
-                margin-top: 15px;
-            }
-            .dashboard-card {
-                background: white;
-                padding: 15px;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                text-align: center;
-            }
-            .dashboard-card h4 {
-                margin: 0 0 10px 0;
-                color: #333;
-            }
-            .dashboard-card a {
-                text-decoration: none;
-                color: #007bff;
-                font-weight: bold;
-            }
-            .dashboard-card a:hover {
-                color: #0056b3;
-            }
+           
         </style>
     </head>
     <body>
         <div class="homepage">
             <!-- Navbar -->
             <header class="navbar">
-                <div class="logo">MRS</div>
+                <div class="logo"></div>
+                <img src="images/bike.png" />
                 <nav class="nav-links">
                     <% if (isLoggedIn) { %>
                         <div class="user-info">
@@ -125,7 +51,7 @@
                         <a href="login.jsp">Login</a>
                     <% } %>
                     <a href="menu.jsp">Service</a>
-                    <a href="#">About Us</a>
+                    <a href="aboutus.jsp">About Us</a>
                     <a href="#" class="active">Home</a>
                 </nav>
             </header>
