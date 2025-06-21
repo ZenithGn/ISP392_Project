@@ -113,7 +113,11 @@
         <div class="homepage">
             <!-- Navbar -->
             <header class="navbar">
-                <div class="logo">MRS</div>
+                <header style=" padding: 10px;">
+  <a href="homepage.jsp" class="logo">
+    <img src="images/logo.png" alt="Logo" style="height: 80px;">
+  </a>
+</header>
                 <nav class="nav-links">
                     <% if (isLoggedIn) { %>
                         <div class="user-info">
@@ -232,12 +236,12 @@
                                 <div class="dashboard-card">
                                     <h4>💳 Thanh toán</h4>
                                     <p>Quản lý phương thức thanh toán</p>
-                                    <a href="customer/payment">Thanh toán</a>
+                                    <a href="payment.jsp">Thanh toán</a>
                                 </div>
                                 <div class="dashboard-card">
                                     <h4>⭐ Đánh giá dịch vụ</h4>
                                     <p>Đánh giá và phản hồi dịch vụ</p>
-                                    <a href="customer/reviews">Đánh giá</a>
+                                    <a href="rateService.jsp">Đánh giá</a>
                                 </div>
                             </div>
                         </div>

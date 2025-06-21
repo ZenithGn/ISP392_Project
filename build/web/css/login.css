@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 body {
-    background-image: url('../images/login.png'); 
+    background-image: url('../images/login1.png'); 
     background-size: cover;           
     background-position: center;      
     background-repeat: no-repeat;     
@@ -36,8 +36,11 @@ input[type="submit"] {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
+  cursor: pointer; /* Thêm dòng này */
 }
-
+input[type="submit"]:hover{
+    color: red;
+}
 a{
     color:white
 }
@@ -47,3 +50,25 @@ input::placeholder {
   font-style: italic;
 }
 
+a:hover{
+    color: red;
+}
+.back-button {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: #0d47a1;
+    transform: scale(1.05);
+}

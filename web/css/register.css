@@ -37,12 +37,21 @@ input[type="submit"] {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
+  cursor: pointer; /* Thêm dòng này */
 }
+input[type="submit"]:hover{
+    color: red;
+}
+
 
 
 
 input::placeholder {
   color: gray;
   font-style: italic;
+}
+
+a:hover{
+    color: red;
 }
 

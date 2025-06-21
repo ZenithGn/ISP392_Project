@@ -12,28 +12,48 @@
         <title>JSP Page</title>
         <link rel="stylesheet" type="text/css" href="css/request.css">
     </head>
-    <body>
-        <div class="request-form">
+     <div class="request-form">
             <h2>Request information</h2>
 
             <!-- FORM BẮT ĐẦU -->
             <form action="requestWaiting.jsp" method="post">
                 <div class="form-group">
-                    <label for="service">Service</label>
-                    <select id="service" name="service" required>
-                        <option value="">Select service</option>
-                        <option value="tire patching">Vá xe tại chỗ</option>
-                        <option value="Tire replacement">Thay lốp</option>
-                        <option value="Towing service">Cứu hộ kéo xe</option>
-                        <option value="Battery jump-start">Nạp bình ắc quy</option>
-                        <option value="Spark plug / filter / oil replacement">Thay bugi / lọc gió / dầu nhớt</option>
-                        <option value="Other">Dịch vụ khác</option>
-                        <div class="form-group" id="other-service-box">
-                            <label for="otherService">Nhập dịch vụ khác</label>
-                            <textarea id="otherService" name="otherService" placeholder="Vui lòng ghi rõ dịch vụ..."></textarea>
-                        </div>
-                    </select>
-                </div>
+                    <table class="service-table">
+    <tr>
+        <td colspan="2"><label for="service"><strong>Service</strong></label></td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="service" value="tire patching"></td>
+        <td>Vá xe tại chỗ</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="service" value="Tire replacement"></td>
+        <td>Thay lốp</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="service" value="Towing service"></td>
+        <td>Cứu hộ kéo xe</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="service" value="Battery jump-start"></td>
+        <td>Nạp bình ắc quy</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="service" value="Spark plug / filter / oil replacement"></td>
+        <td>Thay bugi / lọc gió / dầu nhớt</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" name="service" value="Other" id="otherCheckbox"></td>
+        <td>Dịch vụ khác</td>
+    </tr>
+    <tr id="other-service-box" >
+        <td colspan="8">
+            <label for="otherService">Nhập dịch vụ khác:</label><br>
+            <textarea id="otherService" name="otherService" placeholder="Vui lòng ghi rõ dịch vụ..." rows="3" cols="41"></textarea>
+        </td>
+    </tr>
+</table>
+
 
                 <div class="form-group">
                     <label for="location">Enter location (if GPS enable please ignore)</label>
@@ -44,6 +64,7 @@
                     <label for="note">Request note</label>
                     <textarea id="note" name="note" placeholder="Your note..."></textarea>
                 </div>
+               
 
                 <div class="terms-box">
                     <input type="checkbox" id="terms" name="terms" required>

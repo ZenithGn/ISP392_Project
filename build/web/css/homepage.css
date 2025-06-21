@@ -154,3 +154,11 @@ body {
 .footer h4 {
     margin-bottom: 0.5rem;
 }
+logo img {
+  height: 500px; 
+  display: block;
+}
+.logo {
+  display: inline-block;
+  padding: 10px;
+}
