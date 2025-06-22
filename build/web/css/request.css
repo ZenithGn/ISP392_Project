@@ -8,67 +8,97 @@ and open the template in the editor.
     Author     : Khanh
 */
 
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
 .request-form {
-  width: 350px;
-  margin: 40px auto;
-  border: 2px solid #1a9fff;
-  padding: 20px;
-  border-radius: 10px;
-  font-family: Arial, sans-serif;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
 }
 
 .request-form h2 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #00c3ff;
 }
 
-.form-group {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
+.services-section p {
+    margin-bottom: 10px;
+    font-weight: 500;
 }
 
-.form-group label {
-  margin-bottom: 5px;
-  font-weight: 500;
+.services-section label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
 }
 
-select,
 textarea {
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  resize: vertical;
-  min-height: 40px;
-  color: #333;
+    width: 100%;
+    border: none;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    resize: vertical;
+    min-height: 60px;
 }
 
 textarea::placeholder {
-  color: #aaa;
+    color: #999;
 }
 
-.checkbox-group {
-  display: flex;
-  align-items: center;
+.form-group {
+    margin-top: 20px;
 }
 
-.checkbox-group input[type="checkbox"] {
-  margin-right: 8px;
+.terms-box {
+    margin-top: 20px;
+}
+
+.terms-box label {
+    font-size: 14px;
+}
+
+.terms-box a {
+    color: #00c3ff;
+    text-decoration: underline;
 }
 
 button {
-  width: 100%;
-  padding: 12px;
-  background-color: #222;
-  color: white;
-  font-size: 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    background-color: #00c3ff;
+    color: white;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #444;
+    background-color: #0095cc;
+}
+
+.hidden {
+    display: none;
 }

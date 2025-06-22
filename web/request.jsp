@@ -10,70 +10,53 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" type="text/css" href="css/request.css">
-    </head>
-     <div class="request-form">
-            <h2>Request information</h2>
+       <link rel="stylesheet" href="css/request.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="request-form">
+        <h2><i class="fas fa-motorcycle"></i> Yêu cầu cứu hộ xe máy</h2>
 
-            <!-- FORM BẮT ĐẦU -->
-            <form action="requestWaiting.jsp" method="post">
-                <div class="form-group">
-                    <table class="service-table">
-    <tr>
-        <td colspan="2"><label for="service"><strong>Service</strong></label></td>
-    </tr>
-    <tr>
-        <td><input type="checkbox" name="service" value="tire patching"></td>
-        <td>Vá xe tại chỗ</td>
-    </tr>
-    <tr>
-        <td><input type="checkbox" name="service" value="Tire replacement"></td>
-        <td>Thay lốp</td>
-    </tr>
-    <tr>
-        <td><input type="checkbox" name="service" value="Towing service"></td>
-        <td>Cứu hộ kéo xe</td>
-    </tr>
-    <tr>
-        <td><input type="checkbox" name="service" value="Battery jump-start"></td>
-        <td>Nạp bình ắc quy</td>
-    </tr>
-    <tr>
-        <td><input type="checkbox" name="service" value="Spark plug / filter / oil replacement"></td>
-        <td>Thay bugi / lọc gió / dầu nhớt</td>
-    </tr>
-    <tr>
-        <td><input type="checkbox" name="service" value="Other" id="otherCheckbox"></td>
-        <td>Dịch vụ khác</td>
-    </tr>
-    <tr id="other-service-box" >
-        <td colspan="8">
-            <label for="otherService">Nhập dịch vụ khác:</label><br>
-            <textarea id="otherService" name="otherService" placeholder="Vui lòng ghi rõ dịch vụ..." rows="3" cols="41"></textarea>
-        </td>
-    </tr>
-</table>
+        <form action="requestWaiting.jsp" method="post">
+            <div class="services-section">
+                <p><strong>Chọn dịch vụ bạn cần:</strong></p>
+                <label><input type="checkbox" name="service" value="tire patching"> Vá xe tại chỗ</label>
+                <label><input type="checkbox" name="service" value="Tire replacement"> Thay lốp</label>
+                <label><input type="checkbox" name="service" value="Towing service"> Cứu hộ kéo xe</label>
+                <label><input type="checkbox" name="service" value="Battery jump-start"> Nạp bình ắc quy</label>
+                <label><input type="checkbox" name="service" value="Spark plug / filter / oil replacement"> Thay bugi / lọc gió / dầu nhớt</label>
+                <label><input type="checkbox" name="service" value="Other" id="otherCheckbox"> Dịch vụ khác</label>
 
-
-                <div class="form-group">
-                    <label for="location">Enter location (if GPS enable please ignore)</label>
-                    <textarea id="location" name="location" placeholder="Your location..."></textarea>
+                <div id="other-service-box" class="hidden">
+                    <textarea name="otherService" placeholder="Vui lòng ghi rõ dịch vụ khác..."></textarea>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="note">Request note</label>
-                    <textarea id="note" name="note" placeholder="Your note..."></textarea>
-                </div>
-               
+            <div class="form-group">
+                <label for="location">Vị trí (nếu có GPS có thể bỏ qua):</label>
+                <textarea name="location" placeholder="Nhập vị trí bạn đang gặp sự cố..."></textarea>
+            </div>
 
-                <div class="terms-box">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">Tôi đồng ý với điều khoản</label>
-                </div>
+            <div class="form-group">
+                <label for="note">Ghi chú thêm:</label>
+                <textarea name="note" placeholder="Ghi chú thêm cho nhân viên cứu hộ..."></textarea>
+            </div>
 
-                <button type="submit">Send request information</button>
-            </form>
-            <!-- FORM KẾT THÚC -->
-        </div>
-    </body>
+            <div class="terms-box">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">Tôi đồng ý với <a href="#">điều khoản dịch vụ</a></label>
+            </div>
+
+            <button type="submit"><i class="fas fa-paper-plane"></i> Gửi yêu cầu</button>
+        </form>
+    </div>
+
+    <script>
+        // Hiện/ẩn dịch vụ khác
+        document.getElementById('otherCheckbox').addEventListener('change', function () {
+            const box = document.getElementById('other-service-box');
+            box.classList.toggle('hidden', !this.checked);
+        });
+    </script>
+</body>
 </html>
