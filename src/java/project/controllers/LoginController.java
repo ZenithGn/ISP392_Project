@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import project.model.dao.AccountDAO;
+import project.model.dao.EmployeeDAO;
 import project.model.dto.AccountDTO;
+import project.model.dto.EmployeeDTO;
 
 /**
  *
@@ -49,9 +51,27 @@ public class LoginController extends HttpServlet {
                     case "owner":
                     case "manager":
                     case "customer":
+                        AccountDAO customerDAO = new AccountDAO();
+            String customerId = customerDAO.getCustomerIdByAccountId(account.getId()); // account.getId() là account_id
+            session.setAttribute("CUSTOMER_ID", customerId);
+            url = SUCCESS;
+            break;
                     case "employee":
-                        url = SUCCESS;
-                        break;
+    EmployeeDAO empDAO = new EmployeeDAO();
+    
+    // Ép kiểu từ String -> int
+    int accountId = Integer.parseInt(account.getId());
+
+    EmployeeDTO employee = empDAO.getEmployeeByAccountId(accountId);
+    if (employee != null) {
+        session.setAttribute("LOGIN_EMPLOYEE", employee);
+        url = SUCCESS;
+    } else {
+        request.setAttribute("error", "Không tìm thấy thông tin nhân viên.");
+        request.getRequestDispatcher(ERROR).forward(request, response);
+        return;
+    }
+    break;
                     default:
                         request.setAttribute("error", "Invalid role");
                         request.getRequestDispatcher(ERROR).forward(request, response);

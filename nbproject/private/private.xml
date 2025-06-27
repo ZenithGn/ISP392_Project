@@ -10,6 +10,7 @@
             <file>file:/D:/Code%20github/ISP392_Project/web/aboutUs.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/menu.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/payment1.png</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/css/requestWaiting.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/menu.png</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/honda-head.jpg</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dto/AccountDTO.java</file>
@@ -20,9 +21,11 @@
             <file>file:/D:/Code%20github/ISP392_Project/web/css/login.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/rateService.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/payment.jsp</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/forgotPassword.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/login1.png</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/requestComplete.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/rate.css</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/css/forgotPassword.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/register.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/filter/AuthenticationFilter.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/CreateController.java</file>

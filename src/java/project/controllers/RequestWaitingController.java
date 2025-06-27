@@ -6,50 +6,66 @@
 package project.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import project.model.dao.RequestDAO;
+import project.model.dto.AccountDTO;
+import project.model.dto.RequestDTO;
 
 /**
  *
- * @author KhoaLe
+ * @author Khanh
  */
-public class MainController extends HttpServlet {
+@WebServlet(name = "RequestWaitingController", urlPatterns = {"/RequestWaitingController"})
+public class RequestWaitingController extends HttpServlet {
 
-    private static final String WELCOME = "homepage.jsp";
-    private static final String LOGIN = "Login";
-    private static final String LOGIN_CONTROLLER = "LoginController";
-    private static final String LOGOUT = "Logout";
-    private static final String LOGOUT_CONTROLLER = "LogoutController";
-    private static final String CREATE = "Create";
-    private static final String CREATE_CONTROLLER = "CreateController";
-    private static final String CUSTOMER_REQUEST = "CustomerRequest";
-    private static final String CUSTOMER_REQUEST_CONTROLLER = "CreateRequestController";
-    private static final String MANAGER_REQUEST = "ManagerRequest";
-    private static final String MANAGER_REQUEST_CONTROLLER = "ManagerRequestController";
+    private static final String ERROR = "requestWaiting.jsp";
+    private static final String SUCCESS = "requestWaiting.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = WELCOME;
+        String url = ERROR;
+
         try {
-            String action = request.getParameter("action");
-            if (action == null) {
-                url = WELCOME;
-            } else if (LOGIN.equals(action)) {
-                url = LOGIN_CONTROLLER;
-            } else if (LOGOUT.equals(action)) {
-                url = LOGOUT_CONTROLLER;
-            } else if (CREATE.equals(action)) {
-                url = CREATE_CONTROLLER;
-            } else if (CUSTOMER_REQUEST.equals(action)) {
-                url = CUSTOMER_REQUEST_CONTROLLER;
-            } else if (MANAGER_REQUEST.equals(action)) {
-                url = MANAGER_REQUEST_CONTROLLER;
+            HttpSession session = request.getSession();
+            AccountDTO loginUser = (AccountDTO) session.getAttribute("LOGIN_USER");
+
+            // Kiểm tra người dùng hợp lệ và là customer
+            if (loginUser == null || !"customer".equals(loginUser.getRole())) {
+                request.setAttribute("ERROR", "Bạn không có quyền truy cập!");
+                request.getRequestDispatcher(url).forward(request, response);
+                return;
             }
+
+            // Kiểm tra session flag chỉ hiển thị sau khi tạo yêu cầu
+            Boolean justCreated = (Boolean) session.getAttribute("JUST_CREATED_REQUEST");
+
+            if (justCreated != null && justCreated) {
+                // Lấy danh sách request đang chờ xử lý của người dùng
+                RequestDAO dao = new RequestDAO();
+                List<RequestDTO> waitingRequests = dao.getPendingRequestsByCustomer(loginUser.getUserId());
+
+                request.setAttribute("waitingRequests", waitingRequests);
+
+                // Xóa flag để không hiển thị lại nếu F5
+                session.removeAttribute("JUST_CREATED_REQUEST");
+
+                url = SUCCESS;
+            } else {
+                request.setAttribute("waitingRequests", null);
+                url = SUCCESS;
+            }
+
         } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+            log("Error at CustomerRequestWaitingController: " + e.toString());
+            request.setAttribute("ERROR", "Có lỗi xảy ra: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

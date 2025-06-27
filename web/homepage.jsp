@@ -12,11 +12,11 @@
     if (user == null) {
         user = (AccountDTO) session.getAttribute("account");
     }
-    
+
     String userRole = "";
     String userName = "Guest";
     boolean isLoggedIn = false;
-    
+
     if (user != null) {
         userRole = user.getRole() != null ? user.getRole().toLowerCase() : "";
         userName = user.getUserName() != null ? user.getUserName() : "User";
@@ -25,6 +25,7 @@
 %>
 <!DOCTYPE html>
 <html lang="vi">
+
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -113,152 +114,150 @@
         <div class="homepage">
             <!-- Navbar -->
             <header class="navbar">
-                <header style=" padding: 10px;">
-  <a href="homepage.jsp" class="logo">
-    <img src="images/logo.png" alt="Logo" style="height: 80px;">
-  </a>
-</header>
-                <nav class="nav-links">
-                    <% if (isLoggedIn) { %>
-                        <div class="user-info">
-                            <span>Xin chào, <%= userName %>!</span>
-                            <span class="role-badge role-<%= userRole %>"><%= userRole %></span>
-                            <a href="LogoutController" class="logout-btn">Đăng xuất</a>
-                        </div>
-                    <% } else { %>
-                        <a href="login.jsp">Login</a>
-                    <% } %>
-                    <a href="menu.jsp">Service</a>
-                    <a href="#">About Us</a>
-                    <a href="#" class="active">Home</a>
-                </nav>
-            </header>
+        <div class="logo">
+            <img src="images/logo1.jpg" class="logo-img" />
+        </div>
+        <nav class="nav-links">
+            <% if (isLoggedIn) { %>
+            <div class="user-info">
+                <span>Xin chào, <%= userName %>!</span>
+                <span class="role-badge role-<%= userRole %>"><%= userRole %></span>
+                <a href="LogoutController" class="logout-btn">Đăng xuất</a>
+            </div>
+            <% } else { %>
+            <a href="login.jsp">Login</a>
+            <% } %>
+            <a href="menu.jsp">Service</a>
+            <a href="aboutUs.jsp">About Us</a>
+            <a href="#" class="active">Home</a>
+        </nav>
+    </header>
 
             <!-- Role-specific Dashboard -->
             <% if (isLoggedIn) { %>
-                <section class="role-specific-content">
-                    <% if ("owner".equals(userRole)) { %>
-                        <div class="admin-panel">
-                            <h2>🏢 Owner Dashboard</h2>
-                            <p>Chào mừng chủ sở hữu! Bạn có quyền truy cập toàn bộ hệ thống.</p>
-                            <div class="dashboard-grid">
-                                <div class="dashboard-card">
-                                    <h4>👥 Quản lý nhân viên</h4>
-                                    <p>Xem và quản lý tất cả nhân viên</p>
-                                    <a href="owner/employees">Xem chi tiết</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>📊 Báo cáo doanh thu</h4>
-                                    <p>Xem báo cáo tài chính tổng thể</p>
-                                    <a href="owner/reports">Xem báo cáo</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>⚙️ Cài đặt hệ thống</h4>
-                                    <p>Cấu hình hệ thống và dịch vụ</p>
-                                    <a href="owner/settings">Cài đặt</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>🏪 Quản lý chi nhánh</h4>
-                                    <p>Quản lý các chi nhánh và khu vực</p>
-                                    <a href="owner/branches">Quản lý</a>
-                                </div>
-                            </div>
+            <section class="role-specific-content">
+                <% if ("owner".equals(userRole)) { %>
+                <div class="admin-panel">
+                    <h2>🏢 Owner Dashboard</h2>
+                    <p>Chào mừng chủ sở hữu! Bạn có quyền truy cập toàn bộ hệ thống.</p>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h4>👥 Quản lý nhân viên</h4>
+                            <p>Xem và quản lý tất cả nhân viên</p>
+                            <a href="owner/employees">Xem chi tiết</a>
                         </div>
-                    <% } else if ("manager".equals(userRole)) { %>
-                        <div class="manager-panel">
-                            <h2>👔 Manager Dashboard</h2>
-                            <p>Chào mừng quản lý! Quản lý các hoạt động hàng ngày của chi nhánh.</p>
-                            <div class="dashboard-grid">
-                                <div class="dashboard-card">
-                                    <h4>📋 Quản lý đơn hàng</h4>
-                                    <p>Theo dõi và xử lý các yêu cầu cứu hộ</p>
-                                    <a href="manager/orders">Xem đơn hàng</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>👷 Quản lý nhân viên</h4>
-                                    <p>Phân công và theo dõi nhân viên</p>
-                                    <a href="manager/staff">Quản lý nhân viên</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>📈 Báo cáo chi nhánh</h4>
-                                    <p>Xem hiệu suất chi nhánh</p>
-                                    <a href="manager/branch-reports">Xem báo cáo</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>📞 Hỗ trợ khách hàng</h4>
-                                    <p>Xử lý khiếu nại và phản hồi</p>
-                                    <a href="manager/support">Hỗ trợ</a>
-                                </div>
-                            </div>
+                        <div class="dashboard-card">
+                            <h4>📊 Báo cáo doanh thu</h4>
+                            <p>Xem báo cáo tài chính tổng thể</p>
+                            <a href="owner/reports">Xem báo cáo</a>
                         </div>
-                    <% } else if ("employee".equals(userRole)) { %>
-                        <div class="employee-panel">
-                            <h2>🔧 Employee Dashboard</h2>
-                            <p>Chào mừng nhân viên! Xem các nhiệm vụ được giao và cập nhật trạng thái.</p>
-                            <div class="dashboard-grid">
-                                <div class="dashboard-card">
-                                    <h4>📝 Nhiệm vụ của tôi</h4>
-                                    <p>Xem các yêu cầu cứu hộ được giao</p>
-                                    <a href="employee/my-tasks">Xem nhiệm vụ</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>📍 Cập nhật vị trí</h4>
-                                    <p>Cập nhật vị trí hiện tại của bạn</p>
-                                    <a href="employee/location">Cập nhật vị trí</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>⏰ Chấm công</h4>
-                                    <p>Ghi nhận giờ làm việc</p>
-                                    <a href="employee/timesheet">Chấm công</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>📊 Hiệu suất của tôi</h4>
-                                    <p>Xem thống kê công việc</p>
-                                    <a href="employee/performance">Xem hiệu suất</a>
-                                </div>
-                            </div>
+                        <div class="dashboard-card">
+                            <h4>⚙️ Cài đặt hệ thống</h4>
+                            <p>Cấu hình hệ thống và dịch vụ</p>
+                            <a href="owner/settings">Cài đặt</a>
                         </div>
-                    <% } else if ("customer".equals(userRole)) { %>
-                        <div class="customer-panel">
-                            <h2>🛵 Customer Dashboard</h2>
-                            <p>Chào mừng khách hàng! Đặt dịch vụ cứu hộ và theo dõi trạng thái.</p>
-                            <div class="dashboard-grid">
-                                <div class="dashboard-card">
-                                    <h4>🆘 Yêu cầu cứu hộ</h4>
-                                    <p>Đặt dịch vụ cứu hộ khẩn cấp</p>
-                                    <a href="request.jsp">Yêu cầu ngay</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>📋 Đơn hàng của tôi</h4>
-                                    <p>Theo dõi trạng thái các yêu cầu</p>
-                                    <a href="requestWaiting.jsp">Xem đơn hàng</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>💳 Thanh toán</h4>
-                                    <p>Quản lý phương thức thanh toán</p>
-                                    <a href="payment.jsp">Thanh toán</a>
-                                </div>
-                                <div class="dashboard-card">
-                                    <h4>⭐ Đánh giá dịch vụ</h4>
-                                    <p>Đánh giá và phản hồi dịch vụ</p>
-                                    <a href="rateService.jsp">Đánh giá</a>
-                                </div>
-                            </div>
+                        <div class="dashboard-card">
+                            <h4>🏪 Quản lý chi nhánh</h4>
+                            <p>Quản lý các chi nhánh và khu vực</p>
+                            <a href="owner/branches">Quản lý</a>
                         </div>
-                    <% } %>
-                </section>
-            <% } else { %>
-                <!-- Hero Section for non-logged in users -->
-                <section class="hero">
-                    <h1>Bạn gặp vấn đề về xe máy?</h1>
-                    <p>Liên hệ ngay với đội ngũ nhân viên của chúng tôi.</p>
-                    <a href="login.jsp">
-                        <button class="btn-join">Join Us</button>
-                    </a>
-                    <div class="hero-image">
-                        <img src="images/dich-vu-cuu-ho-xe-may.png" alt="Dịch vụ cứu hộ xe máy" />
                     </div>
-                </section>
+                </div>
+                <% } else if ("manager".equals(userRole)) { %>
+                <div class="manager-panel">
+                    <h2>👔 Manager Dashboard</h2>
+                    <p>Chào mừng quản lý! Quản lý các hoạt động hàng ngày của chi nhánh.</p>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h4>📋 Quản lý đơn hàng</h4>
+                            <p>Theo dõi và xử lý các yêu cầu cứu hộ</p>
+                            <a href="managerRequest.jsp">Xem đơn hàng</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <h4>👷 Quản lý nhân viên</h4>
+                            <p>Phân công và theo dõi nhân viên</p>
+                            <a href="employeeManage.jsp">Quản lý nhân viên</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <h4>📈 Báo cáo chi nhánh</h4>
+                            <p>Xem hiệu suất chi nhánh</p>
+                            <a href="manager/branch-reports">Xem báo cáo</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <h4>📞 Hỗ trợ khách hàng</h4>
+                            <p>Xử lý khiếu nại và phản hồi</p>
+                            <a href="manager/support">Hỗ trợ</a>
+                        </div>
+                    </div>
+                </div>
+                <% } else if ("employee".equals(userRole)) { %>
+                <div class="employee-panel">
+                    <h2>🔧 Employee Dashboard</h2>
+                    <p>Chào mừng nhân viên! Xem các nhiệm vụ được giao và cập nhật trạng thái.</p>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h4>📝 Nhiệm vụ của tôi</h4>
+                            <p>Xem các yêu cầu cứu hộ được giao</p>
+                            <a href="employeeTask.jsp">Xem nhiệm vụ</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <h4>📍 Cập nhật vị trí</h4>
+                            <p>Cập nhật vị trí hiện tại của bạn</p>
+                            <a href="employee/location">Cập nhật vị trí</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <h4>⏰ Chấm công</h4>
+                            <p>Ghi nhận giờ làm việc</p>
+                            <a href="employee/timesheet">Chấm công</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <h4>📊 Hiệu suất của tôi</h4>
+                            <p>Xem thống kê công việc</p>
+                            <a href="employee/performance">Xem hiệu suất</a>
+                        </div>
+                    </div>
+                </div>
+                <% } else if ("customer".equals(userRole)) { %>
+                <div class="customer-panel">
+                    <h2>🛵 Customer Dashboard</h2>
+                    <p>Chào mừng khách hàng! Đặt dịch vụ cứu hộ và theo dõi trạng thái.</p>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h4>🆘 Yêu cầu cứu hộ</h4>
+                            <p>Đặt dịch vụ cứu hộ khẩn cấp</p>
+                            <a href="customerRequest.jsp">Yêu cầu ngay</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <h4>📋 Đơn hàng của tôi</h4>
+                            <p>Theo dõi trạng thái các yêu cầu</p>
+                            <a href="requestWaiting.jsp">Xem đơn hàng</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <h4>💳 Thanh toán</h4>
+                            <p>Quản lý phương thức thanh toán</p>
+                            <a href="payment.jsp">Thanh toán</a>
+                        </div>
+                        <div class="dashboard-card">
+                            <h4>⭐ Đánh giá dịch vụ</h4>
+                            <p>Đánh giá và phản hồi dịch vụ</p>
+                            <a href="rateService.jsp">Đánh giá</a>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </section>
+            <% } else { %>
+            <!-- Hero Section for non-logged in users -->
+            <section class="hero">
+                <h1>Bạn gặp vấn đề về xe máy?</h1>
+                <p>Liên hệ ngay với đội ngũ nhân viên của chúng tôi.</p>
+                <a href="login.jsp">
+                    <button class="btn-join">Join Us</button>
+                </a>
+                <div class="hero-image">
+                    <img src="images/dich-vu-cuu-ho-xe-may.png" alt="Dịch vụ cứu hộ xe máy" />
+                </div>
+            </section>
             <% } %>
 
             <!-- Services Section -->
@@ -269,30 +268,30 @@
                         <img src="images/keo-xe2.jpg" alt="Kéo xe" />
                         <p class="service-title">Kéo xe</p>
                         <% if ("customer".equals(userRole)) { %>
-                            <p class="service-desc">Dịch vụ kéo xe chuyên nghiệp 24/7</p>
-                            <a href="customer/book-service?type=keo-xe">Đặt dịch vụ</a>
+                        <p class="service-desc">Dịch vụ kéo xe chuyên nghiệp 24/7</p>
+                        <a href="customer/book-service?type=keo-xe">Đặt dịch vụ</a>
                         <% } else { %>
-                            <p class="service-desc">Dịch vụ này đang cập nhật vui lòng chọn dịch vụ khác</p>
+                        <p class="service-desc">Dịch vụ này đang cập nhật vui lòng chọn dịch vụ khác</p>
                         <% } %>
                     </div>
                     <div class="service-card">
                         <img src="images/bom-vo.jpg" alt="Bơm và vá lốp xe" />
                         <p class="service-title">Bơm và vá lốp xe</p>
                         <% if ("customer".equals(userRole)) { %>
-                            <p class="service-desc">Sửa chữa lốp xe tại chỗ nhanh chóng</p>
-                            <a href="customer/book-service?type=bom-lop">Đặt dịch vụ</a>
+                        <p class="service-desc">Sửa chữa lốp xe tại chỗ nhanh chóng</p>
+                        <a href="customer/book-service?type=bom-lop">Đặt dịch vụ</a>
                         <% } else { %>
-                            <p class="service-desc">Dịch vụ này đang cập nhật vui lòng chọn dịch vụ khác</p>
+                        <p class="service-desc">Dịch vụ này đang cập nhật vui lòng chọn dịch vụ khác</p>
                         <% } %>
                     </div>
                     <div class="service-card">
                         <img src="images/do-xang.jpg" alt="Đổ xăng" />
                         <p class="service-title">Đổ xăng</p>
                         <% if ("customer".equals(userRole)) { %>
-                            <p class="service-desc">Giao xăng tận nơi khi bạn cần</p>
-                            <a href="customer/book-service?type=do-xang">Đặt dịch vụ</a>
+                        <p class="service-desc">Giao xăng tận nơi khi bạn cần</p>
+                        <a href="customer/book-service?type=do-xang">Đặt dịch vụ</a>
                         <% } else { %>
-                            <p class="service-desc">Dịch vụ này đang cập nhật vui lòng chọn dịch vụ khác</p>
+                        <p class="service-desc">Dịch vụ này đang cập nhật vui lòng chọn dịch vụ khác</p>
                         <% } %>
                     </div>
                 </div>
@@ -309,17 +308,17 @@
                 </ul>
                 <div class="buttons">
                     <% if (isLoggedIn) { %>
-                        <% if ("customer".equals(userRole)) { %>
-                            <a href="customer/emergency"><button>Khẩn cấp</button></a>
-                            <a href="customer/find-nearby"><button class="secondary">Tìm gần nhất</button></a>
-                        <% } else { %>
-                            <button>Dashboard</button>
-                            <button class="secondary">Báo cáo</button>
-                        <% } %>
+                    <% if ("customer".equals(userRole)) { %>
+                    <a href="customer/emergency"><button>Khẩn cấp</button></a>
+                    <a href="customer/find-nearby"><button class="secondary">Tìm gần nhất</button></a>
                     <% } else { %>
-                        <button>Button</button>
-                        <button class="secondary">Secondary button</button>
+                    <button>Dashboard</button>
+                    <button class="secondary">Báo cáo</button>
                     <% } %>
+                    <% } else { %>
+                    <button>Button</button>
+                    <button class="secondary">Secondary button</button>
+                    <% }%>
                 </div>
                 <img src="images/map-pin.png" alt="Map" class="map-image" />
             </section>

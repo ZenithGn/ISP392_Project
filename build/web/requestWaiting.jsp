@@ -4,41 +4,44 @@
     Author     : Khanh
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="project.model.dto.RequestDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-         <link rel="stylesheet" type="text/css" href="css/requestWaiting.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
-    <div class="status-box">
-        <i class="fas fa-clock status-icon"></i>
-        <h2>Yêu cầu của bạn đang được xử lý</h2>
-        <p class="status-text"><strong>Trạng thái:</strong> <span class="status waiting">ĐANG CHỜ XỬ LÝ</span></p>
-        <p>Cảm ơn bạn đã gửi yêu cầu cứu hộ. Nhân viên sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
-        
-        <%
-    String role = (String) session.getAttribute("userRole");
-    String backHome = "homepage.jsp"; 
-
-    if ("customer".equals(role)) {
-        backHome = "customer/home.jsp";
-    } else if ("owner".equals(role)) {
-        backHome = "owner/home.jsp";
-    } else if ("manager".equals(role)) {
-        backHome = "manager/home.jsp";
-    } else if ("employee".equals(role)) {
-        backHome = "employee/home.jsp";
-    }
+<%
+    List<RequestDTO> waitingRequests = (List<RequestDTO>) request.getAttribute("waitingRequests");
 %>
 
-<a href="<%= backHome %>" class="back-button">
-    <i class="fas fa-arrow-left"></i> Quay về trang chủ
-</a>
-        
-    </div>
+<html>
+<head>
+    <title>Yêu Cầu Đang Chờ</title>
+</head>
+<body>
+    <h2>Danh Sách Yêu Cầu Đang Chờ</h2>
+
+    <% if (waitingRequests == null || waitingRequests.isEmpty()) { %>
+        <p>Không có yêu cầu nào đang chờ xử lý.</p>
+    <% } else { %>
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>Mã Yêu Cầu</th>
+                <th>Vị Trí</th>
+                <th>Độ Khẩn</th>
+                <th>Ngày Tạo</th>
+                <th>Trạng Thái</th>
+            </tr>
+            <% for (RequestDTO req : waitingRequests) { %>
+                <tr>
+                    <td><%= req.getRequestId() %></td>
+                    <td><%= req.getLocation() %></td>
+                    <td><%= req.getUrgency() %></td>
+                    <td><%= req.getCreatedAt() %></td>
+                    <td><%= req.getStatus() %></td>
+                </tr>
+            <% } %>
+        </table>
+    <% } %>
+
+    <a href="homepage.jsp">← Quay lại trang chủ</a>
 </body>
 </html>

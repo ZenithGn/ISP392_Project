@@ -17,12 +17,7 @@
     </head>
     <body>
         <!-- Display error message if any -->
-            <% String error = (String) request.getAttribute("error"); %>
-            <% if (error != null) { %>
-                <div style="color: red; margin-bottom: 10px;">
-                    <%= error %>
-                </div>
-            <% } %>
+            
         <!-- Login Form -->
         
             <a href="homepage.jsp">
@@ -35,6 +30,7 @@
 
             
                  <section class="wrapper">
+                     
       <div class="form signup">
         <header>Signup</header>
         <form action="MainController" method="POST">
@@ -56,9 +52,16 @@
         <form action="MainController" method="POST">
           <input type="text" name="phone" required placeholder="Phone"/> 
                 <input type="password" name="password" required placeholder="Password"/>
-          <a href="#">Forgot password?</a>
+          <a href="forgotPassword.jsp">Forgot password?</a>
           <input type="submit" name="action" value="Login" />
         </form>
+        
+        <% String error = (String) request.getAttribute("error"); %>
+            <% if (error != null) { %>
+                <div style="color: red; margin-bottom: 10px;">
+                    <%= error %>
+                </div>
+            <% } %>
       </div>
       <script>
         const wrapper = document.querySelector(".wrapper"),
