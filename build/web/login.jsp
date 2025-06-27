@@ -12,6 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/login.css">
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
     <body>
         <!-- Login Form -->
@@ -29,7 +30,11 @@
             <form action="MainController" method="POST">
                 <input type="text" name="phone" required placeholder="Phone"/> <br>
                 <input type="password" name="password" required placeholder="Password"/><br>
-
+                <!-- Google reCAPTCHA -->
+                <div class="captcha-container">
+                    <div class="g-recaptcha"
+                         data-sitekey="6LeUgm4rAAAAAAeEQdhn0NzN8qGhtZh8s_fn8B6s"></div>
+                </div>
                 <p>Chưa có tài khoản?  <a href="register.jsp">Đăng ký</a></p>
                 <br><input type="submit" name="action" value="Login"/>
             </form>

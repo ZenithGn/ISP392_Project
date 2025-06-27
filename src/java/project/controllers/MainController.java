@@ -24,6 +24,8 @@ public class MainController extends HttpServlet {
     private static final String LOGOUT_CONTROLLER = "LogoutController";
     private static final String CREATE = "Create";
     private static final String CREATE_CONTROLLER = "CreateController";
+    private static final String VERIFY_RECAPTCHA = "VerifyRecaptcha";
+    private static final String VERIFY_RECAPTCHA_CONTROLLER = "VerifyRecaptchaController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,6 +41,8 @@ public class MainController extends HttpServlet {
                 url = LOGOUT_CONTROLLER;
             } else if (CREATE.equals(action)) {
                 url = CREATE_CONTROLLER;
+            } else if (VERIFY_RECAPTCHA.equals(action)) {
+                url = VERIFY_RECAPTCHA_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

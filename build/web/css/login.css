@@ -47,3 +47,14 @@ input::placeholder {
   font-style: italic;
 }
 
+.g-recaptcha {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+    width: fit-content;
+}
+.captcha-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}

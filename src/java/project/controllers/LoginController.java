@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import project.model.dao.AccountDAO;
 import project.model.dto.AccountDTO;
+import project.recap.VerifyRecaptcha;
 
 /**
  *
@@ -34,8 +35,22 @@ public class LoginController extends HttpServlet {
         String url = ERROR;
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
+        String gRecaptcha = request.getParameter("g-recaptcha-response");
 
         try {
+            if (gRecaptcha == null || gRecaptcha.isEmpty()) {
+            request.setAttribute("error", "Vui lòng xác minh CAPTCHA.");
+            request.getRequestDispatcher(ERROR).forward(request, response);
+            return;
+            }
+
+            boolean isCaptchaValid = VerifyRecaptcha.verify(gRecaptcha);
+            if (!isCaptchaValid) {
+            request.setAttribute("error", "CAPTCHA không hợp lệ hoặc hết hạn.");
+            request.getRequestDispatcher(ERROR).forward(request, response);
+            return;
+            }
+            
             AccountDAO dao = new AccountDAO();
             AccountDTO account = dao.checkLoginByPhone(phone, password);
 
