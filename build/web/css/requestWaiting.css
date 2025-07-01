@@ -9,23 +9,69 @@ and open the template in the editor.
 */
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    padding: 30px;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
 }
 
 .status-box {
-    border: 1px solid #ddd;
-    padding: 20px;
-    background-color: #fff8dc;
-    width: 400px;
-    margin: auto;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px 30px;
+    border-radius: 12px;
     text-align: center;
-    border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
 }
 
-.status {
-    color: orange;
+.status-box h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.status-text {
+    font-size: 18px;
+    margin: 15px 0;
+}
+
+.status.waiting {
+    color: #ffcc00;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+.status-icon {
+    font-size: 40px;
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 15px;
+    color: #ddd;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 20px;
+    background-color: #00c3ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0095cc;
 }

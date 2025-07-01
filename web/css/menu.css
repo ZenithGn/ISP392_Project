@@ -7,32 +7,73 @@ and open the template in the editor.
     Created on : Jun 15, 2025, 8:41:35 PM
     Author     : Khanh
 */
+/* Nền toàn trang */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 100vh;
+    
+    background-image: url('../images/menu.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .menu-container {
-    max-width: 900px;
-    margin: 50px auto;
-    background: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* bỏ margin trên để tránh đẩy container xuống */
+    margin: 0 auto;
     padding: 30px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 8px;
+    
 }
 
-h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 30px;
+
+
+/* Nút Back đẹp + icon */
+.back-button {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.back-button:hover {
+    background-color: #0d47a1;
+    transform: scale(1.05);
+}
+
+/* Bảng + hotline cố định sát đáy */
+.bottom-section {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    right: 30px;
+}
+
+/* Bảng trong suốt nhẹ */
 .service-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 30px;
+    background-color: rgba(255,255,255,0.88); /* nền trắng mờ nhẹ */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 15px;
 }
 
 .service-table th,
@@ -48,16 +89,17 @@ h1 {
 }
 
 .service-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f9f9f9;
 }
 
+/* Hotline dưới bảng */
 .hotline {
     text-align: center;
     font-size: 18px;
-    background: #ffefc2;
+    background: #fff3cd;
     padding: 15px;
     border-radius: 6px;
     color: #c0392b;
     font-weight: bold;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
-

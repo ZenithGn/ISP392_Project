@@ -24,6 +24,10 @@ public class MainController extends HttpServlet {
     private static final String LOGOUT_CONTROLLER = "LogoutController";
     private static final String CREATE = "Create";
     private static final String CREATE_CONTROLLER = "CreateController";
+    private static final String CUSTOMER_REQUEST = "CustomerRequest";
+    private static final String CUSTOMER_REQUEST_CONTROLLER = "CreateRequestController";
+    private static final String MANAGER_REQUEST = "ManagerRequest";
+    private static final String MANAGER_REQUEST_CONTROLLER = "ManagerRequestController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,6 +43,10 @@ public class MainController extends HttpServlet {
                 url = LOGOUT_CONTROLLER;
             } else if (CREATE.equals(action)) {
                 url = CREATE_CONTROLLER;
+            } else if (CUSTOMER_REQUEST.equals(action)) {
+                url = CUSTOMER_REQUEST_CONTROLLER;
+            } else if (MANAGER_REQUEST.equals(action)) {
+                url = MANAGER_REQUEST_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

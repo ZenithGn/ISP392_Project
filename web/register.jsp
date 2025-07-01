@@ -7,9 +7,9 @@
         <link rel="stylesheet" type="text/css" href="css/register.css">
     </head>
     <body>
-        <div class="image-box"></div>
+        
         <div class="container">
-            
+             <h1>Đăng ký</h1>
             <!-- Display error message -->
             <% 
                 String error = (String) request.getAttribute("error");
@@ -30,40 +30,22 @@
                 </div>
             <% } %>
 
-            <form action="MainController" method="POST">
-                <table>
-                    <tr>
-                        <td>User Name:</td>
-                        <td><input type="text" name="userName" required minlength="2" maxlength="20"/></td>
-                    </tr>
-                    <tr>
-                        <td>Email Address:</td>
-                        <td><input type="email" name="emailAddress" required maxlength="250"/></td>
-                    </tr>
-                    <tr>
-                        <td>Phone:</td>
-                        <td><input type="text" name="phone" required/></td>
-                    </tr>
-                    <tr>
-                        <td>Password:</td>
-                        <td><input type="password" name="password" required minlength="8" maxlength="30"/></td>
-                    </tr>
-                    <tr>
-                        <td>Confirm Password:</td>
-                        <td><input type="password" name="confirm" required/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <p>Đã có tài khoản? <a href="login.jsp">Login</a></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" name="action" value="Create"/>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+           <form action="MainController" method="POST">
+    
+    <input type="text" name="userName" required minlength="2" maxlength="20" placeholder="Nhập tên người dùng"/>
+    <br>
+    <input type="text" name="emailAddress" required maxlength="250" minlength="2" placeholder="Nhập email"/>
+    <br>
+    <input type="text" name="phone" required placeholder="Nhập số điện thoại"/>
+    <br>
+    <input type="password" name="password" required minlength="8" maxlength="30" placeholder="Nhập mật khẩu"/>
+    <br>
+    <input type="password" name="confirm" required placeholder="Nhập lại mật khẩu"/>
+
+    <p>Đã có tài khoản? <a href="login.jsp">Login</a></p>
+    <br><input type="submit" name="action" value="Create"/>
+</form>
+
         </div>
     </body>
 </html>
