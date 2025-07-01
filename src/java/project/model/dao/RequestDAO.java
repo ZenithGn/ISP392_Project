@@ -10,6 +10,7 @@ import project.utils.DBUtils;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import project.model.dto.FeedBackDTO;
 import project.model.dto.RequestDetailDTO;
 
 /**
@@ -282,7 +283,97 @@ public List<RequestDetailDTO> getTasksByEmployeeId(int employeeId) throws Except
 }
 
 
+ public List<RequestDTO> getActiveRequestsByCustomer(String customerId) throws SQLException {
+    List<RequestDTO> list = new ArrayList<>();
+    Connection conn = null;
+    PreparedStatement ptm = null;
+    ResultSet rs = null;
+    try {
+        conn = DBUtils.getConnection();
+        if (conn != null) {
+            ptm = conn.prepareStatement(
+                "SELECT r.request_id, r.status, r.customer_id, r.created_at, " +
+                "r.location, r.urgency, " +
+                "c.customer_nickName, c.phone, c.email " +
+                "FROM Request r " +
+                "JOIN Customer c ON r.customer_id = c.customer_id " +
+                "WHERE r.status IN ('pending', 'In Progress') AND r.customer_id = ? " +
+                "ORDER BY r.created_at DESC"
+            );
+            ptm.setString(1, customerId); // ✅ thêm điều kiện theo khách hàng
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                RequestDTO request = new RequestDTO();
+                request.setRequestId(rs.getString("request_id"));
+                request.setStatus(rs.getString("status"));
+                request.setCustomerId(rs.getString("customer_id"));
+                request.setCreatedAt(rs.getTimestamp("created_at"));
+                request.setCustomerName(rs.getString("customer_nickName"));
+                request.setCustomerPhone(rs.getString("phone"));
+                request.setCustomerEmail(rs.getString("email"));
+                request.setLocation(rs.getString("location"));
+                request.setUrgency(rs.getString("urgency"));
+                list.add(request);
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (rs != null) rs.close();
+        if (ptm != null) ptm.close();
+        if (conn != null) conn.close();
+    }
+    return list;
+}
 
+ public boolean insertFeedback(FeedBackDTO feedback) throws Exception {
+    Connection conn = null;
+    PreparedStatement ps = null;
+    try {
+        conn = DBUtils.getConnection();
+        String sql = "INSERT INTO Feedback (request_id, rating, comment, service_id, customer_id) " +
+                     "VALUES (?, ?, ?, ?, ?)";
+        ps = conn.prepareStatement(sql);
+        ps.setString(1, feedback.getRequestId());
+        ps.setInt(2, feedback.getRating());
+        ps.setString(3, feedback.getComment());
+        
+
+        return ps.executeUpdate() > 0;
+    } finally {
+        if (ps != null) ps.close();
+        if (conn != null) conn.close();
+    }
+}
+ 
+ public RequestDetailDTO getRequestDetailInfo(String requestId) throws Exception {
+    RequestDetailDTO dto = null;
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    try {
+        conn = DBUtils.getConnection();
+        String sql = "SELECT rd.service_id, r.customer_id " +
+                     "FROM RequestDetail rd " +
+                     "JOIN Request r ON rd.request_id = r.request_id " +
+                     "WHERE rd.request_id = ?";
+        ps = conn.prepareStatement(sql);
+        ps.setString(1, requestId);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            dto = new RequestDetailDTO();
+            dto.setServiceId(rs.getInt("service_id"));          // từ RequestDetail
+            dto.setCustomerId(rs.getString("customer_id"));     // từ Request
+        }
+    } finally {
+        if (rs != null) rs.close();
+        if (ps != null) ps.close();
+        if (conn != null) conn.close();
+    }
+    return dto;
+}
+
+    
 
 
 }

@@ -16,10 +16,11 @@
 <div class="rate-container">
     <h2>Đánh giá dịch vụ cứu hộ MRS</h2>
     <form action="submitRate" method="post">
+         <input type="hidden" name="action" value="rate" />
         <label for="requestId">Mã yêu cầu:</label>
         <input type="text" id="requestId" name="requestId" required>
 
-        <label for="user">Tên của bạn:</label>
+        <label for="user">Id của bạn:</label>
         <input type="text" id="user" name="user" required>
 
         <label for="service">Dịch vụ đã sử dụng:</label>

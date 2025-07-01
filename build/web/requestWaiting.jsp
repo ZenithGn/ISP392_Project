@@ -15,6 +15,8 @@
 <html>
 <head>
     <title>Yêu Cầu Đang Chờ</title>
+    <link rel="stylesheet" type="text/css" href="css/requestWaiting.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <h2>Danh Sách Yêu Cầu Đang Chờ</h2>
@@ -41,7 +43,13 @@
             <% } %>
         </table>
     <% } %>
+    
+    <div class="action-buttons">
+    <a href="homepage.jsp" class="btn-back">← Quay lại trang chủ</a>
 
-    <a href="homepage.jsp">← Quay lại trang chủ</a>
+    <form action="RequestWaitingController" method="GET">
+        <button type="submit" class="btn-reload">🔄 Tải lại danh sách</button>
+    </form>
+</div>
 </body>
 </html>
