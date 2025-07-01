@@ -16,7 +16,7 @@ import java.io.IOException;
 public class CreateRequestController extends HttpServlet {
 
     private static final String ERROR = "customerRequest.jsp";
-    private static final String SUCCESS = "customerRequest.jsp";
+    private static final String SUCCESS = "requestWaiting.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -76,17 +76,20 @@ public class CreateRequestController extends HttpServlet {
         }
     }
 
-    request.setAttribute("SUCCESS", "Yêu cầu đã được tạo thành công! Mã yêu cầu: " + requestId);
-    url = SUCCESS;
-}
+    
+    session.setAttribute("JUST_CREATED_REQUEST", true);
+                    session.setAttribute("JUST_CREATED_CUSTOMER_ID", customerId);
+                    response.sendRedirect(SUCCESS); // ✅ redirect thay vì forward
+                    return;
+                } else {
+                    request.setAttribute("ERROR", "Tạo yêu cầu thất bại.");
+                }
             } else {
                 request.setAttribute("ERROR", "Vui lòng chọn loại dịch vụ!");
             }
         } catch (Exception e) {
             log("Error at CreateRequestController: " + e.toString());
             request.setAttribute("ERROR", "Có lỗi xảy ra: " + e.getMessage());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

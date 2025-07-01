@@ -7,56 +7,42 @@ package project.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import project.model.dao.RequestDAO;
-import project.model.dto.AccountDTO;
-import project.model.dto.RequestDTO;
 
 /**
  *
  * @author Khanh
  */
-@WebServlet(name = "RequestWaitingController", urlPatterns = {"/RequestWaitingController"})
-public class RequestWaitingController extends HttpServlet {
+@WebServlet(name = "ManagerFeedbackController", urlPatterns = {"/ManagerFeedbackController"})
+public class ManagerFeedbackController extends HttpServlet {
 
-    private static final String ERROR = "requestWaiting.jsp";
-    private static final String SUCCESS = "requestWaiting.jsp";
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-
-        try {
-            HttpSession session = request.getSession();
-            AccountDTO loginUser = (AccountDTO) session.getAttribute("LOGIN_USER");
-
-            if (loginUser == null || !"customer".equals(loginUser.getRole())) {
-                request.setAttribute("ERROR", "Bạn không có quyền truy cập!");
-                request.getRequestDispatcher(url).forward(request, response);
-                return;
-            }
-
-            RequestDAO dao = new RequestDAO();
-            List<RequestDTO> waitingRequests = dao.getActiveRequestsByCustomer((String) session.getAttribute("CUSTOMER_ID"));
-            request.setAttribute("waitingRequests", waitingRequests);
-
-            // Xóa flag nếu có
-            session.removeAttribute("JUST_CREATED_REQUEST");
-
-            url = SUCCESS;
-
-        } catch (Exception e) {
-            log("Error at CustomerRequestWaitingController: " + e.toString());
-            request.setAttribute("ERROR", "Có lỗi xảy ra: " + e.getMessage());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ManagerFeedbackController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ManagerFeedbackController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

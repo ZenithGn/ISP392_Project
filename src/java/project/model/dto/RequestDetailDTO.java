@@ -23,7 +23,7 @@ private String location;
 private String urgency;
 private Timestamp createdAt;
 private String customerName;
-
+private String customerId;
     public RequestDetailDTO() {
     }
 
@@ -37,6 +37,11 @@ private String customerName;
         this.urgency = urgency;
         this.createdAt = createdAt;
         this.customerName = customerName;
+        
+    }
+
+    public RequestDetailDTO(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getRequestId() {
@@ -109,6 +114,14 @@ private String customerName;
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     

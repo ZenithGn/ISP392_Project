@@ -52,26 +52,26 @@ public class LoginController extends HttpServlet {
                     case "manager":
                     case "customer":
                         AccountDAO customerDAO = new AccountDAO();
-            String customerId = customerDAO.getCustomerIdByAccountId(account.getId()); // account.getId() là account_id
-            session.setAttribute("CUSTOMER_ID", customerId);
-            url = SUCCESS;
-            break;
+                        String customerId = customerDAO.getCustomerIdByAccountId(account.getId()); // account.getId() là account_id
+                        session.setAttribute("CUSTOMER_ID", customerId);
+                        url = SUCCESS;
+                        break;
                     case "employee":
-    EmployeeDAO empDAO = new EmployeeDAO();
-    
-    // Ép kiểu từ String -> int
-    int accountId = Integer.parseInt(account.getId());
+                        EmployeeDAO empDAO = new EmployeeDAO();
 
-    EmployeeDTO employee = empDAO.getEmployeeByAccountId(accountId);
-    if (employee != null) {
-        session.setAttribute("LOGIN_EMPLOYEE", employee);
-        url = SUCCESS;
-    } else {
-        request.setAttribute("error", "Không tìm thấy thông tin nhân viên.");
-        request.getRequestDispatcher(ERROR).forward(request, response);
-        return;
-    }
-    break;
+                        // Ép kiểu từ String -> int
+                        int accountId = Integer.parseInt(account.getId());
+
+                        EmployeeDTO employee = empDAO.getEmployeeByAccountId(accountId);
+                        if (employee != null) {
+                            session.setAttribute("LOGIN_EMPLOYEE", employee);
+                            url = SUCCESS;
+                        } else {
+                            request.setAttribute("error", "Không tìm thấy thông tin nhân viên.");
+                            request.getRequestDispatcher(ERROR).forward(request, response);
+                            return;
+                        }
+                        break;
                     default:
                         request.setAttribute("error", "Invalid role");
                         request.getRequestDispatcher(ERROR).forward(request, response);

@@ -8,70 +8,139 @@ and open the template in the editor.
     Author     : Khanh
 */
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+/* === Reset === */
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: white;
+    box-sizing: border-box;
 }
 
-.status-box {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 40px 30px;
-    border-radius: 12px;
+/* === Body Styling === */
+body {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #eef2f7, #ffffff);
+    min-height: 100vh;
+    padding: 40px;
+    color: #2c3e50;
+}
+
+/* === Heading === */
+h2 {
     text-align: center;
+    font-size: 32px;
+    margin-bottom: 40px;
+    font-weight: 600;
+    color: #1f3a93;
+    letter-spacing: 1px;
+}
+
+/* === Table Styling === */
+table {
     width: 100%;
-    max-width: 450px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
+    border-collapse: collapse;
+    margin: auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
-.status-box h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #fff;
+th, td {
+    padding: 18px 22px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
 }
 
-.status-text {
-    font-size: 18px;
-    margin: 15px 0;
-}
-
-.status.waiting {
-    color: #ffcc00;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.status-icon {
-    font-size: 40px;
-    color: #ffcc00;
-    margin-bottom: 15px;
-}
-
-p {
+th {
+    background-color: #2d8cf0;
+    color: #ffffff;
     font-size: 15px;
-    color: #ddd;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
 }
 
-.back-button {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 12px 20px;
-    background-color: #00c3ff;
+td {
+    font-size: 15px;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #f9fbfd;
+}
+
+tr:hover {
+    background-color: #eaf3fd;
+    transition: background-color 0.3s ease;
+}
+
+/* === No Requests Message === */
+p {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 40px;
+}
+
+
+
+/* Nút Tải lại danh sách */
+/* Container cho 2 nút */
+.action-buttons {
+    display: flex;
+    justify-content: center;        /* Đưa cả hai nút vào giữa */
+    align-items: center;
+    gap: 20px;                      /* Khoảng cách giữa 2 nút */
+    margin-top: 40px;
+}
+
+/* Nút quay lại */
+.btn-back {
+    padding: 12px 24px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
     color: white;
-    border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s ease;
+    font-weight: 500;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(101, 76, 255, 0.3);
 }
 
-.back-button:hover {
-    background-color: #0095cc;
+.btn-back:hover {
+    background: linear-gradient(to right, #502bd8, #1e63da);
+    transform: translateY(-2px);
+}
+
+/* Nút tải lại */
+.btn-reload {
+    padding: 12px 24px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 114, 255, 0.3);
+}
+
+.btn-reload:hover {
+    background: linear-gradient(to right, #0090ff, #0055cc);
+    transform: translateY(-2px);
+}
+
+
+
+/* === Animation === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

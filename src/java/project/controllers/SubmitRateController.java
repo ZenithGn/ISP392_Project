@@ -7,8 +7,6 @@ package project.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,22 +15,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import project.model.dao.RequestDAO;
 import project.model.dto.AccountDTO;
-import project.model.dto.EmployeeDTO;
-import project.model.dto.RequestDTO;
+import project.model.dto.FeedBackDTO;
 import project.model.dto.RequestDetailDTO;
 
 /**
  *
  * @author Khanh
  */
-@WebServlet(name = "EmployeeTaskController", urlPatterns = {"/EmployeeTaskController"})
-public class EmployeeTaskController extends HttpServlet {
+@WebServlet(name = "SubmitRateController", urlPatterns = {"/SubmitRateController"})
+public class SubmitRateController extends HttpServlet {
 
-   private static final String ERROR = "login.jsp";
-    private static final String SUCCESS = "employeeTask.jsp";
+   
+
+    private static final String ERROR = "rateService.jsp";
+    private static final String SUCCESS = "thankyou.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
 
@@ -40,51 +40,52 @@ public class EmployeeTaskController extends HttpServlet {
             HttpSession session = request.getSession();
             AccountDTO loginUser = (AccountDTO) session.getAttribute("LOGIN_USER");
 
-            if (loginUser == null || !"employee".equals(loginUser.getRole())) {
-                request.setAttribute("ERROR", "Bạn không có quyền truy cập!");
-                request.getRequestDispatcher(ERROR).forward(request, response);
+            // Kiểm tra đăng nhập và role là customer
+            if (loginUser == null || !"customer".equals(loginUser.getRole())) {
+                request.setAttribute("ERROR", "Bạn cần đăng nhập với tài khoản khách hàng!");
+                request.getRequestDispatcher(url).forward(request, response);
                 return;
             }
 
-            EmployeeDTO emp = (EmployeeDTO) session.getAttribute("LOGIN_EMPLOYEE");
+            String action = request.getParameter("action"); // nếu muốn dùng action
+            if ("rate".equals(action)) {
 
-            if (emp == null) {
-                request.setAttribute("ERROR", "Không tìm thấy thông tin nhân viên.");
-                request.getRequestDispatcher(ERROR).forward(request, response);
-                return;
-            }
-
-            String action = request.getParameter("action");
-
-            RequestDAO dao = new RequestDAO();
-            int employeeId = emp.getEmployeeId();
-
-            if ("complete".equals(action)) {
                 String requestId = request.getParameter("requestId");
+                String comment = request.getParameter("comment");
+                int stars = Integer.parseInt(request.getParameter("stars"));
 
-                boolean updated = dao.updateRequestStatus(requestId, "completed");
+                RequestDAO reqDao = new RequestDAO();
+                RequestDetailDTO detail = reqDao.getRequestDetailInfo(requestId);
 
-                if (updated) {
-                    request.setAttribute("SUCCESS", "Đã hoàn thành yêu cầu: " + requestId);
+                if (detail == null) {
+                    request.setAttribute("ERROR", "Không tìm thấy thông tin yêu cầu!");
                 } else {
-                    request.setAttribute("ERROR", "Không thể cập nhật trạng thái yêu cầu.");
+                    FeedBackDTO feedback = new FeedBackDTO(
+                        requestId, stars, comment,
+                        detail.getServiceId(), detail.getCustomerId()
+                    );
+
+                    RequestDAO dao = new RequestDAO();
+                    boolean inserted = dao.insertFeedback(feedback);
+
+                    if (inserted) {
+                        request.setAttribute("SUCCESS", "Cảm ơn bạn đã đánh giá dịch vụ!");
+                        url = SUCCESS;
+                    } else {
+                        request.setAttribute("ERROR", "Không thể lưu đánh giá.");
+                    }
                 }
+            } else {
+                request.setAttribute("ERROR", "Hành động không hợp lệ.");
             }
-
-            // Load lại danh sách nhiệm vụ sau khi cập nhật
-            List<RequestDetailDTO> taskList = dao.getTasksByEmployeeId(employeeId);
-            request.setAttribute("tasks", taskList);
-
-            url = SUCCESS;
 
         } catch (Exception e) {
-            log("Error at EmployeeTaskController: " + e.toString());
-            request.setAttribute("ERROR", "Có lỗi xảy ra: " + e.getMessage());
+            log("Error at SubmitRateController: " + e.toString());
+            request.setAttribute("ERROR", "Lỗi hệ thống: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
