@@ -43,9 +43,15 @@ public class ServiceDAO {
                 list.add(dto);
             }
         } finally {
-            if (rs != null) rs.close();
-            if (ptm != null) ptm.close();
-            if (conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
 
         return list;
@@ -68,12 +74,58 @@ public class ServiceDAO {
                 price = rs.getBigDecimal("price");
             }
         } finally {
-            if (rs != null) rs.close();
-            if (ptm != null) ptm.close();
-            if (conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
 
         return price;
     }
-}
 
+    public boolean createService(ServiceDTO dto) {
+        try (Connection conn = DBUtils.getConnection()) {
+            String sql = "INSERT INTO Service(service_name, price, garage_id, is_active) VALUES (?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, dto.getServiceName());
+            ps.setBigDecimal(2, dto.getPrice());
+            ps.setInt(3, dto.getGarageId());
+            ps.setBoolean(4, dto.isActive());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deleteService(int id) {
+        try (Connection conn = DBUtils.getConnection()) {
+            String sql = "DELETE FROM Service WHERE service_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateService(ServiceDTO dto) {
+        try (Connection conn = DBUtils.getConnection()) {
+            String sql = "UPDATE Service SET service_name = ?, price = ? WHERE service_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, dto.getServiceName());
+            ps.setBigDecimal(2, dto.getPrice());
+            ps.setInt(3, dto.getServiceId());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+}

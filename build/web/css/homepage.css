@@ -95,7 +95,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    color: var(--gray-900);
+    color:  var(--gray-900);
     background: var(--gray-50);
     overflow-x: hidden;
 }

@@ -114,24 +114,24 @@
         <div class="homepage">
             <!-- Navbar -->
             <header class="navbar">
-        <div class="logo">
-            <img src="images/logo1.jpg" class="logo-img" />
-        </div>
-        <nav class="nav-links">
-            <% if (isLoggedIn) { %>
-            <div class="user-info">
-                <span>Xin chào, <%= userName %>!</span>
-                <span class="role-badge role-<%= userRole %>"><%= userRole %></span>
-                <a href="LogoutController" class="logout-btn">Đăng xuất</a>
-            </div>
-            <% } else { %>
-            <a href="login.jsp">Login</a>
-            <% } %>
-            <a href="menu.jsp">Service</a>
-            <a href="aboutUs.jsp">About Us</a>
-            <a href="#" class="active">Home</a>
-        </nav>
-    </header>
+                <div class="logo">
+                    <img src="images/logo1.jpg" class="logo-img" />
+                </div>
+                <nav class="nav-links">
+                    <% if (isLoggedIn) {%>
+                    <div class="user-info">
+                        <span>Xin chào, <%= userName%>!</span>
+                        <span class="role-badge role-<%= userRole%>"><%= userRole%></span>
+                        <a href="LogoutController" class="logout-btn">Đăng xuất</a>
+                    </div>
+                    <% } else { %>
+                    <a href="login.jsp">Login</a>
+                    <% } %>
+                    <a href="menu.jsp">Service</a>
+                    <a href="aboutUs.jsp">About Us</a>
+                    <a href="#" class="active">Home</a>
+                </nav>
+            </header>
 
             <!-- Role-specific Dashboard -->
             <% if (isLoggedIn) { %>
@@ -179,14 +179,14 @@
                             <a href="employeeManage.jsp">Quản lý nhân viên</a>
                         </div>
                         <div class="dashboard-card">
-                            <h4>📈 Báo cáo chi nhánh</h4>
-                            <p>Xem hiệu suất chi nhánh</p>
-                            <a href="manager/branch-reports">Xem báo cáo</a>
+                            <h4>🚗 Quản lý dịch vụ</h4>
+                            <p>Thêm sửa các dịch vụ</p>
+                            <a href="manageService.jsp">Xem dịch vụ</a>
                         </div>
                         <div class="dashboard-card">
-                            <h4>📞 Hỗ trợ khách hàng</h4>
-                            <p>Xử lý khiếu nại và phản hồi</p>
-                            <a href="manager/support">Hỗ trợ</a>
+                            <h4>📈 Báo cáo chi nhánh</h4>
+                            <p>Xem hiệu suất chi nhánh</p>
+                            <a href="reportStatistic.jsp">Báo cáo</a>
                         </div>
                     </div>
                 </div>

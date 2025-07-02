@@ -28,6 +28,20 @@ public class MainController extends HttpServlet {
     private static final String CUSTOMER_REQUEST_CONTROLLER = "CreateRequestController";
     private static final String MANAGER_REQUEST = "ManagerRequest";
     private static final String MANAGER_REQUEST_CONTROLLER = "ManagerRequestController";
+    private static final String SERVICE_CREATE = "createService";
+    private static final String SERVICE_CREATE_CONTROLLER = "CreateServiceController";
+    private static final String SERVICE_DELETE = "deleteService";
+    private static final String SERVICE_DELETE_CONTROLLER = "DeleteServiceController";
+    private static final String SERVICE_UPDATE = "updateService";
+    private static final String SERVICE_UPDATE_CONTROLLER = "UpdateServiceController";
+    private static final String ADD_EMPLOYEE = "AddEmployee";
+    private static final String ADD_EMPLOYEE_CONTROLLER = "AddEmployeeController";
+    private static final String UPDATE_EMPLOYEE = "updateEmployee";
+    private static final String UPDATE_EMPLOYEE_CONTROLLER = "UpdateEmployeeController";
+    private static final String DELETE_EMPLOYEE = "Delete";
+    private static final String DELETE_EMPLOYEE_CONTROLLER = "DeleteEmployeeController";
+    private static final String SEARCH_EMPLOYEE = "searchEmployee";
+    private static final String SEARCH_EMPLOYEE_CONTROLLER = "SearchEmployeeController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,6 +61,20 @@ public class MainController extends HttpServlet {
                 url = CUSTOMER_REQUEST_CONTROLLER;
             } else if (MANAGER_REQUEST.equals(action)) {
                 url = MANAGER_REQUEST_CONTROLLER;
+            } else if (SERVICE_CREATE.equals(action)) {
+                url = SERVICE_CREATE_CONTROLLER;
+            } else if (SERVICE_DELETE.equals(action)) {
+                url = SERVICE_DELETE_CONTROLLER;
+            } else if (SERVICE_UPDATE.equals(action)) {
+                url = SERVICE_UPDATE_CONTROLLER;
+            } else if (ADD_EMPLOYEE.equals(action)) {
+                url = ADD_EMPLOYEE_CONTROLLER;
+            } else if (UPDATE_EMPLOYEE.equals(action)) {
+                url = UPDATE_EMPLOYEE_CONTROLLER;
+            } else if (DELETE_EMPLOYEE.equals(action)) {
+                url = DELETE_EMPLOYEE_CONTROLLER;
+            } else if (SEARCH_EMPLOYEE.equals(action)) {
+                url = SEARCH_EMPLOYEE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
