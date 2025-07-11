@@ -956,3 +956,205 @@ html {
     width: auto;
     object-fit: contain;
 }
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 150px;
+    height: calc(100vh - 80px);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    z-index: 998;
+    overflow-y: auto;
+    transform: translateX(0);
+}
+.svg {
+    fill: var(--dark-bg);
+}
+.sidebar-active {
+    display: none;
+}
+.open-sidebar-button, .close-sidebar-button {
+    padding: 0 20px;
+    display: none;
+}
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+.links-container {
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.links-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.links-container li {
+    margin: 0;
+}
+
+.links-container a {
+    display: block;
+    text-decoration: none;
+    color: var(--gray-700);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.875rem 1.25rem;
+    border-radius: 12px;
+    transition: var(--transition);
+    background: transparent;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.links-container a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-gradient);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.links-container a:hover::before,
+.links-container a.active::before {
+    left: 0;
+}
+
+.links-container a:hover,
+.links-container a.active {
+    color: white;
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+.links-container a:hover {
+    background: rgba(0, 102, 255, 0.1);
+}
+
+.links-container a.active {
+    font-weight: 600;
+}
+
+/* Sidebar Toggle Button */
+.open-sidebar-button,
+.close-sidebar-button {
+    display: none;
+    background: var(--primary-gradient);
+    border: none;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+}
+
+.open-sidebar-button:hover,
+.close-sidebar-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.close-sidebar-button {
+    align-self: flex-end;
+    margin-bottom: 1rem;
+}
+
+/* Hide checkbox */
+#sidebar-active {
+    display: none;
+}
+
+/* Content adjustment when sidebar is visible */
+.main-content {
+    margin-left: 250px;
+    transition: var(--transition);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+        box-shadow: none;
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .open-sidebar-button {
+        display: block;
+        position: fixed;
+        top: 90px;
+        left: 1rem;
+        z-index: 1001;
+    }
+    
+    .close-sidebar-button {
+        display: block;
+    }
+    
+    /* When sidebar is active on mobile */
+    #sidebar-active:checked ~ .sidebar {
+        transform: translateX(0);
+        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    #sidebar-active:checked ~ .open-sidebar-button {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    /* Overlay when sidebar is open on mobile */
+    #sidebar-active:checked ~ .sidebar::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 280px;
+        width: calc(100vw - 280px);
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%;
+        transform: translateX(-100%);
+    }
+    
+    #sidebar-active:checked ~ .sidebar::after {
+        left: 100%;
+        width: 0;
+    }
+}
