@@ -15,17 +15,19 @@ import java.math.BigDecimal;
 public class ServiceDTO implements Serializable {
     private int serviceId;
     private String serviceName;
-    private BigDecimal price;
+    private double basePrice;
+    private double unitPrice;
     private int garageId;
     private boolean isActive;
 
     public ServiceDTO() {
     }
 
-    public ServiceDTO(int serviceId, String serviceName, BigDecimal price, int garageId, boolean isActive) {
+    public ServiceDTO(int serviceId, String serviceName, double basePrice, double unitPrice, int garageId, boolean isActive) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
-        this.price = price;
+        this.basePrice = basePrice;
+        this.unitPrice = unitPrice;
         this.garageId = garageId;
         this.isActive = isActive;
     }
@@ -46,12 +48,20 @@ public class ServiceDTO implements Serializable {
         this.serviceName = serviceName;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public double getBasePrice() {
+        return basePrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setBasePrice(double basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public int getGarageId() {
@@ -62,12 +72,14 @@ public class ServiceDTO implements Serializable {
         this.garageId = garageId;
     }
 
-    public boolean isActive() {
+    public boolean isIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
+
+    
 }
 

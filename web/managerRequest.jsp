@@ -124,7 +124,7 @@
         <form action="ManagerRequestController" method="GET">
             <button type="submit" class="load-btn"><i class="fas fa-sync-alt"></i> Tải lại danh sách</button>
         </form>
-        <a href="homepage.jsp" class="back-btn">← Quay lại</a>
+        <a href="managerOrderMenu.jsp" class="back-btn">← Quay lại</a>
     </div>
 
     <% } %>

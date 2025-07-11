@@ -14,21 +14,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import project.model.dao.FeedbackDAO;
+import project.model.dao.RequestDAO;
 import project.model.dto.AccountDTO;
-import project.model.dto.FeedBackDTO;
+import project.model.dto.RequestDetailDTO;
 
 /**
  *
  * @author Khanh
  */
-@WebServlet(name = "ManagerFeedbackController", urlPatterns = {"/ManagerFeedbackController"})
-public class ManagerFeedbackController extends HttpServlet {
+@WebServlet(name = "ManagerAllTaskController", urlPatterns = {"/ManagerAllTaskController"})
+public class ManagerAllTaskController extends HttpServlet {
 
-    
-
-    private static final String ERROR = "managerFeedback.jsp";
-    private static final String SUCCESS = "managerFeedback.jsp";
+    private static final String ERROR = "managerAllTasks.jsp";
+    private static final String SUCCESS = "managerAllTasks.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,27 +38,28 @@ public class ManagerFeedbackController extends HttpServlet {
             HttpSession session = request.getSession();
             AccountDTO loginUser = (AccountDTO) session.getAttribute("LOGIN_USER");
 
-            // Chỉ cho phép role manager truy cập
             if (loginUser == null || !"manager".equals(loginUser.getRole())) {
                 request.setAttribute("ERROR", "Bạn không có quyền truy cập!");
                 request.getRequestDispatcher(url).forward(request, response);
                 return;
             }
 
-            // Lấy danh sách feedback từ database
-            FeedbackDAO dao = new FeedbackDAO();
-            List<FeedBackDTO> feedbackList = dao.getAllFeedback();
+            // Xử lý các hành động nếu cần mở rộng (ví dụ: lọc trạng thái, tìm kiếm, v.v.)
+            String action = request.getParameter("action");
 
-            if (feedbackList == null || feedbackList.isEmpty()) {
-                request.setAttribute("WARNING", "Chưa có đánh giá nào từ khách hàng.");
+            RequestDAO dao = new RequestDAO();
+            List<RequestDetailDTO> assignedTasks = dao.getAllAssignedTasks(); // lấy các task trạng thái != pending
+
+            if (assignedTasks == null || assignedTasks.isEmpty()) {
+                request.setAttribute("WARNING", "Không có yêu cầu nào đang xử lý hoặc đã hoàn tất.");
             }
 
-            request.setAttribute("FEEDBACK_LIST", feedbackList);
+            request.setAttribute("assignedTasks", assignedTasks);
             url = SUCCESS;
 
         } catch (Exception e) {
-            log("Error at ManagerFeedbackController: " + e.toString());
-            request.setAttribute("ERROR", "Đã xảy ra lỗi: " + e.getMessage());
+            log("Error at ManagerAllTaskController: " + e.toString());
+            request.setAttribute("ERROR", "Có lỗi xảy ra: " + e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

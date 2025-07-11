@@ -1,0 +1,147 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 3, 2025, 1:58:59 PM
+    Author     : Khanh
+*/
+
+/* Reset và font cơ bản */
+/* Reset styles */
+/* Reset & base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f6fc;
+    color: #333;
+    padding: 40px 20px;
+}
+
+/* Header */
+h2 {
+    text-align: center;
+    color: #2d3748;
+    margin-bottom: 35px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+th, td {
+    padding: 15px 20px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.8px;
+}
+
+td {
+    font-size: 15px;
+    color: #444;
+}
+
+td a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* Status styling */
+.status {
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.status.processing {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status.completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status.canceled {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Button container */
+div[style*="margin-top"] {
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* Buttons */
+form button,
+a.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+    box-shadow: 0 4px 14px rgba(0, 114, 255, 0.3);
+}
+
+form button:hover,
+a.button-link:hover {
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table, th, td {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    form button,
+    a.button-link {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+

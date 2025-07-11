@@ -159,15 +159,32 @@
 <td><%= task.getNotes() %></td>
                 
                 <td>
-                    <% if ("In Progress".equalsIgnoreCase(task.getStatus())) { %>
-                        <form action="EmployeeTaskController" method="POST" style="display:inline;">
-                            <input type="hidden" name="action" value="complete" />
-                            <input type="hidden" name="requestId" value="<%= task.getRequestId() %>" />
-                            <button type="submit" class="btn">Hoàn Thành</button>
-                        </form>
-                    <% } else { %>
-                        <span style="color: gray;">Đã xử lý</span>
-                    <% } %>
+                 <% if ("Assigned".equalsIgnoreCase(task.getStatus())) { %>
+    <form action="EmployeeTaskController" method="POST">
+        <input type="hidden" name="action" value="accept">
+        <input type="hidden" name="requestId" value="<%= task.getRequestId() %>">
+        <button type="submit" class="btn">Chấp nhận</button>
+    </form>
+        
+        <form action="EmployeeTaskController" method="POST">
+        <input type="hidden" name="action" value="reject" />
+        <input type="hidden" name="requestId" value="<%= task.getRequestId() %>" />
+        <button class="btn btn-danger">Từ chối</button>
+    </form>
+
+<% } else if ("In progress".equalsIgnoreCase(task.getStatus())) { %>
+    <form action="EmployeeTaskController" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="action" value="complete">
+        <input type="hidden" name="requestId" value="<%= task.getRequestId() %>">
+        
+        <textarea name="employeeNote" placeholder="Ghi chú cho Manager..." required></textarea>
+        <input type="file" name="imageFile" accept="image/*" required>
+        <button type="submit" class="btn">Hoàn thành</button>
+    </form>
+
+<% } else { %>
+    <span style="color: gray;">Đã xử lý</span>
+<% } %>
                 </td>
             </tr>
             <%

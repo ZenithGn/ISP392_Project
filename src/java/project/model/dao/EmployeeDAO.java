@@ -396,4 +396,13 @@ public class EmployeeDAO {
     return employee;
 }
     
+    public boolean unassignEmployee(String requestId) throws Exception {
+    String sql = "UPDATE RequestDetail SET employee_id = NULL WHERE request_id = ?";
+    try (Connection conn = DBUtils.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, requestId);
+        return ps.executeUpdate() > 0;
+    }
+}
+    
 }

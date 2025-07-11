@@ -10,10 +10,12 @@
             <file>file:/D:/Code%20github/ISP392_Project/web/aboutUs.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/RequestWaitingController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/menu.css</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/requestCreated.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/menu.png</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dao/ServiceDAO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dto/AccountDTO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/aboutUs.css</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/managerAllTasks.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/payment.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/logo1.jpg</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/EmployeeManageController.java</file>
@@ -30,12 +32,15 @@
             <file>file:/D:/Code%20github/ISP392_Project/web/requestComplete.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dao/RequestDAO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/menu1.png</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/css/managerAllTask.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/managerFeedback.jsp</file>
+            <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dto/RequestDTO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/requestWaiting.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/LoginController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dto/RequestDetailDTO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/register.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/employeeManage.jsp</file>
+            <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/LogoutController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/SubmitRateController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/employeeTask.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/managerRequest.jsp</file>
@@ -43,25 +48,32 @@
             <file>file:/D:/Code%20github/ISP392_Project/web/images/image1.png</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/employeeMangage.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/homepage.css</file>
+            <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/MainController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dao/AccountDAO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/customerRequest.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/payment1.png</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/requestWaiting.css</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/thankyou.jsp</file>
+            <file>file:/D:/Code%20github/ISP392_Project/src/java/project/utils/DBUtils.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/honda-head.jpg</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/register123.png</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/map-pin.png</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/CreateRequestController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/login.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dto/EmployeeDTO.java</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/managerOrderMenu.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/forgotPassword.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/login1.png</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/requestComplete.css</file>
+            <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/ManagerAllTaskController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dto/ServiceDTO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/register.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/filter/AuthenticationFilter.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/CreateController.java</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/css/manageOrderMenu.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/request.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/managerPage.css</file>
+            <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dao/FeedbackDAO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dao/EmployeeDAO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/keo-xe2.jpg</file>
         </group>

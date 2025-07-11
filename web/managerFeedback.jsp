@@ -61,6 +61,14 @@
     <% } else { %>
         <p>Không có đánh giá nào được tìm thấy.</p>
     <% } %>
+    
+    <div class="footer-action">
+        <form action="MainController" method="POST">
+            <input type="hidden" name="action" value="ManagerFeedback" />
+            <button type="submit">🔄 Tải lại danh sách</button>
+        </form>
+        <a href="managerOrderMenu.jsp" class="back-btn">← Quay lại</a>
+    </div>
 </body>
 </html>
 

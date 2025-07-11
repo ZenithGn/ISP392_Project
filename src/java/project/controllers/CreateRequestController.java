@@ -16,7 +16,7 @@ import java.io.IOException;
 public class CreateRequestController extends HttpServlet {
 
     private static final String ERROR = "customerRequest.jsp";
-    private static final String SUCCESS = "requestWaiting.jsp";
+    private static final String SUCCESS = "requestCreated.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -67,20 +67,36 @@ public class CreateRequestController extends HttpServlet {
                 boolean check = dao.createRequest(newRequest);
                 if (check) {
     // Thêm từng dòng vào RequestDetail
-    for (String serviceIdStr : serviceType) {
-        int serviceId = Integer.parseInt(serviceIdStr);
-        boolean added = dao.insertRequestDetail(requestId, serviceId,null, description); // chưa có nhân viên
+   for (String serviceIdStr : serviceType) {
+    int serviceId = Integer.parseInt(serviceIdStr);
+    String quantityStr = request.getParameter("quantity_" + serviceIdStr);
+    int quantity = 1;
+    try {
+        quantity = Integer.parseInt(quantityStr);
+    } catch (NumberFormatException e) {
+        // fallback
+    }
+
+    boolean added = dao.insertRequestDetail(requestId, serviceId, null, description, quantity);
+
         if (!added) {
             request.setAttribute("ERROR", "Tạo chi tiết yêu cầu thất bại!");
             break; // hoặc có thể rollback nếu muốn an toàn hơn
         }
     }
-
-    
+RequestDTO createdRequest = dao.getRequestById(requestId); 
+    if (createdRequest != null) {
+    // ✅ Dùng session để truyền dữ liệu sang trang đích
+    session.setAttribute("newRequest", createdRequest);
     session.setAttribute("JUST_CREATED_REQUEST", true);
-                    session.setAttribute("JUST_CREATED_CUSTOMER_ID", customerId);
-                    response.sendRedirect(SUCCESS); // ✅ redirect thay vì forward
-                    return;
+    session.setAttribute("JUST_CREATED_CUSTOMER_ID", customerId);
+
+    // ✅ Chuyển trang bằng redirect (URL mới hiển thị trên trình duyệt)
+    response.sendRedirect(SUCCESS); // "requestCreated.jsp"
+    return;
+} else {
+    request.setAttribute("ERROR", "Không thể truy vấn đơn hàng vừa tạo.");
+}
                 } else {
                     request.setAttribute("ERROR", "Tạo yêu cầu thất bại.");
                 }

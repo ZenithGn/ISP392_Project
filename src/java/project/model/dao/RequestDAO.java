@@ -27,8 +27,8 @@ public class RequestDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(
-   "INSERT INTO Request (request_id, status, customer_id, location, urgency, total_price, created_at) "
-           + "VALUES (?, ?, ?, ?, ?, ?, GETDATE())"
+   "INSERT INTO Request (request_id, status, customer_id, location, urgency, total_price, service_type, created_at) "
+           + "VALUES (?, ?, ?, ?, ?, ?, ?, GETDATE())"
                 );
 
 ptm.setString(1, request.getRequestId());
@@ -37,7 +37,7 @@ ptm.setString(3, request.getCustomerId());
 ptm.setString(4, request.getLocation());
 ptm.setString(5, request.getUrgency());
 ptm.setDouble(6, request.getTotalPrice());
-
+ptm.setString(7, request.getServiceType());
                 check = ptm.executeUpdate() > 0;
             }
         } catch (Exception e) {
@@ -54,6 +54,85 @@ ptm.setDouble(6, request.getTotalPrice());
         }
         return check;
     }
+    
+    public RequestDTO getRequestById(String requestId) throws Exception {
+    RequestDTO dto = null;
+    Connection conn = null;
+    PreparedStatement ptm = null;
+    ResultSet rs = null;
+
+    try {
+        conn = DBUtils.getConnection();
+        if (conn != null) {
+            String sql = "SELECT request_id, customer_id, status, " +
+                         "location, urgency, total_price,service_type, created_at " +
+                         "FROM Request WHERE request_id = ?";
+            ptm = conn.prepareStatement(sql);
+            ptm.setString(1, requestId);
+            rs = ptm.executeQuery();
+
+            if (rs.next()) {
+                dto = new RequestDTO();
+                dto.setRequestId(rs.getString("request_id"));
+                dto.setCustomerId(rs.getString("customer_id"));
+                dto.setStatus(rs.getString("status"));
+                dto.setLocation(rs.getString("location"));
+                dto.setUrgency(rs.getString("urgency"));
+                dto.setTotalPrice(rs.getDouble("total_price"));
+                dto.setServiceType(rs.getString("service_type"));
+                dto.setCreatedAt(rs.getTimestamp("created_at"));
+                
+                
+            }
+        }
+    } finally {
+        if (rs != null) rs.close();
+        if (ptm != null) ptm.close();
+        if (conn != null) conn.close();
+    }
+
+    return dto;
+}
+    
+    public RequestDTO getRequestById1(String requestId) throws Exception {
+    RequestDTO dto = null;
+    Connection conn = null;
+    PreparedStatement ptm = null;
+    ResultSet rs = null;
+
+    try {
+        conn = DBUtils.getConnection();
+        if (conn != null) {
+            String sql = "SELECT TOP 1 request_id, customer_id, status, " +
+                         "location, urgency, total_price,service_type, created_at " +
+                         "FROM Request WHERE request_id = ?";
+            ptm = conn.prepareStatement(sql);
+            ptm.setString(1, requestId);
+            rs = ptm.executeQuery();
+
+            if (rs.next()) {
+                dto = new RequestDTO();
+                dto.setRequestId(rs.getString("request_id"));
+                dto.setCustomerId(rs.getString("customer_id"));
+                dto.setStatus(rs.getString("status"));
+                dto.setLocation(rs.getString("location"));
+                dto.setUrgency(rs.getString("urgency"));
+                dto.setTotalPrice(rs.getDouble("total_price"));
+                dto.setServiceType(rs.getString("service_type"));
+                dto.setCreatedAt(rs.getTimestamp("created_at"));
+                
+                
+            }
+        }
+    } finally {
+        if (rs != null) rs.close();
+        if (ptm != null) ptm.close();
+        if (conn != null) conn.close();
+    }
+
+    return dto;
+}
+
 
     public List<RequestDTO> getAllPendingRequests() throws SQLException {
         List<RequestDTO> list = new ArrayList<>();
@@ -212,8 +291,8 @@ public boolean assignEmployeeToRequest(String requestId, int employeeId) throws 
         return ps.executeUpdate() > 0;
     }
 }
-public boolean insertRequestDetail(String requestId, int serviceId, Integer employeeId,String notes) throws Exception {
-    String sql = "INSERT INTO RequestDetail (request_id, service_id, employee_id, notes) VALUES (?, ?, ?, ?)";
+public boolean insertRequestDetail(String requestId, int serviceId, Integer employeeId, String notes, int quantity) throws Exception {
+    String sql = "INSERT INTO RequestDetail (request_id, service_id, employee_id, notes, quantity) VALUES (?, ?, ?, ?, ?)";
     try (Connection conn = DBUtils.getConnection();
          PreparedStatement ps = conn.prepareStatement(sql)) {
         ps.setString(1, requestId);
@@ -224,6 +303,7 @@ public boolean insertRequestDetail(String requestId, int serviceId, Integer empl
             ps.setInt(3, employeeId);
         }
         ps.setString(4, notes);
+        ps.setInt(5, quantity); // 🔥 Thêm dòng này để set quantity
         return ps.executeUpdate() > 0;
     }
 }
@@ -326,25 +406,7 @@ public List<RequestDetailDTO> getTasksByEmployeeId(int employeeId) throws Except
     return list;
 }
 
- public boolean insertFeedback(FeedBackDTO feedback) throws Exception {
-    Connection conn = null;
-    PreparedStatement ps = null;
-    try {
-        conn = DBUtils.getConnection();
-        String sql = "INSERT INTO Feedback (request_id, rating, comment, service_id, customer_id) " +
-                     "VALUES (?, ?, ?, ?, ?)";
-        ps = conn.prepareStatement(sql);
-        ps.setString(1, feedback.getRequestId());
-        ps.setInt(2, feedback.getRating());
-        ps.setString(3, feedback.getComment());
-        
 
-        return ps.executeUpdate() > 0;
-    } finally {
-        if (ps != null) ps.close();
-        if (conn != null) conn.close();
-    }
-}
  
  public RequestDetailDTO getRequestDetailInfo(String requestId) throws Exception {
     RequestDetailDTO dto = null;
@@ -373,7 +435,81 @@ public List<RequestDetailDTO> getTasksByEmployeeId(int employeeId) throws Except
     return dto;
 }
 
-    
+    public boolean updateRequestDetailNoteAndImage(String requestId, int employeeId, String note, String imagePath) throws SQLException {
+    boolean check = false;
+    Connection conn = null;
+    PreparedStatement ptm = null;
+    try {
+        conn = DBUtils.getConnection();
+        if (conn != null) {
+            String sql = "UPDATE RequestDetail SET employee_note = ?, image_path = ? WHERE request_id = ? AND employee_id = ?";
+            ptm = conn.prepareStatement(sql);
+            ptm.setString(1, note);
+            ptm.setString(2, imagePath);
+            ptm.setString(3, requestId);
+            ptm.setInt(4, employeeId);
+
+            check = ptm.executeUpdate() > 0;
+        }
+    } catch (Exception e) {
+        e.printStackTrace(); // hoặc log lỗi nếu cần
+    } finally {
+        if (ptm != null) {
+            ptm.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
+    }
+    return check;
+}
+
+public List<RequestDetailDTO> getAllAssignedTasks() throws Exception {
+    List<RequestDetailDTO> list = new ArrayList<>();
+    Connection conn = null;
+    PreparedStatement ptm = null;
+    ResultSet rs = null;
+
+    try {
+        conn = DBUtils.getConnection();
+        if (conn != null) {
+           String sql = "SELECT r.request_id, r.location, r.urgency, r.status, r.created_at, " +
+             "rd.service_id, rd.notes, rd.image_path, s.service_name, rd.employee_note, " +  // <-- thêm dấu phẩy ở đây
+             "c.customer_nickName, e.name AS employee_name " +
+             "FROM RequestDetail rd " +
+             "JOIN Request r ON rd.request_id = r.request_id " +
+             "JOIN Service s ON rd.service_id = s.service_id " +
+             "JOIN Customer c ON r.customer_id = c.customer_id " +
+             "LEFT JOIN Employee e ON rd.employee_id = e.employee_id " +
+             "WHERE r.status IN ('assigned', 'in progress', 'completed', 'cancelled')";
+
+            ptm = conn.prepareStatement(sql);
+            rs = ptm.executeQuery();
+
+            while (rs.next()) {
+                RequestDetailDTO dto = new RequestDetailDTO();
+                dto.setRequestId(rs.getString("request_id"));
+                dto.setServiceId(rs.getInt("service_id"));
+                dto.setServiceName(rs.getString("service_name"));
+                dto.setNotes(rs.getString("notes"));
+                dto.setStatus(rs.getString("status"));
+                dto.setLocation(rs.getString("location"));
+                dto.setUrgency(rs.getString("urgency"));
+                dto.setCreatedAt(rs.getTimestamp("created_at"));
+                dto.setCustomerName(rs.getString("customer_nickName"));
+                dto.setEmployeeName(rs.getString("employee_name"));
+                dto.setEmployeeNote(rs.getString("employee_note"));
+                dto.setImagePath(rs.getString("image_path"));
+                list.add(dto);
+            }
+        }
+    } finally {
+        if (rs != null) rs.close();
+        if (ptm != null) ptm.close();
+        if (conn != null) conn.close();
+    }
+    return list;
+}
 
 
 }

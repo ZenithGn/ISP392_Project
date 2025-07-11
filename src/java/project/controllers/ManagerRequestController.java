@@ -48,7 +48,7 @@ public class ManagerRequestController extends HttpServlet {
         boolean assigned = dao.assignEmployeeToRequest(requestId, employeeId);
 
         if (assigned) {
-            dao.updateRequestStatus(requestId, "In Progress");
+            dao.updateRequestStatus(requestId, "Assigned");
             request.setAttribute("SUCCESS", "Đã gán nhân viên và chuyển trạng thái!");
         } else {
             request.setAttribute("ERROR", "Không thể gán nhân viên.");

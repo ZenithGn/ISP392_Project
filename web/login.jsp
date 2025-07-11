@@ -29,7 +29,7 @@
             
 
             
-                 <section class="wrapper">
+                <section class="wrapper active">
                      
       <div class="form signup">
         <header>Signup</header>

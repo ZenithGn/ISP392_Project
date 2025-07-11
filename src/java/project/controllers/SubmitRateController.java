@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import project.model.dao.FeedbackDAO;
 import project.model.dao.RequestDAO;
 import project.model.dto.AccountDTO;
 import project.model.dto.FeedBackDTO;
+import project.model.dto.RequestDTO;
 import project.model.dto.RequestDetailDTO;
 
 /**
@@ -25,14 +27,12 @@ import project.model.dto.RequestDetailDTO;
 @WebServlet(name = "SubmitRateController", urlPatterns = {"/SubmitRateController"})
 public class SubmitRateController extends HttpServlet {
 
-   
-
     private static final String ERROR = "rateService.jsp";
     private static final String SUCCESS = "thankyou.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        
+
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
 
@@ -40,40 +40,50 @@ public class SubmitRateController extends HttpServlet {
             HttpSession session = request.getSession();
             AccountDTO loginUser = (AccountDTO) session.getAttribute("LOGIN_USER");
 
-            // Kiểm tra đăng nhập và role là customer
             if (loginUser == null || !"customer".equals(loginUser.getRole())) {
                 request.setAttribute("ERROR", "Bạn cần đăng nhập với tài khoản khách hàng!");
                 request.getRequestDispatcher(url).forward(request, response);
                 return;
             }
 
-            String action = request.getParameter("action"); // nếu muốn dùng action
-            if ("rate".equals(action)) {
+            String action = request.getParameter("action");
+            if ("SubmitRate".equals(action)) {
 
                 String requestId = request.getParameter("requestId");
                 String comment = request.getParameter("comment");
-                int stars = Integer.parseInt(request.getParameter("stars"));
+                String starsStr = request.getParameter("stars");
+                int stars = 0;
+                try {
+                    stars = Integer.parseInt(starsStr);
+                    if (stars < 1 || stars > 5) throw new NumberFormatException();
+                } catch (NumberFormatException e) {
+                    request.setAttribute("ERROR", "Vui lòng chọn số sao hợp lệ từ 1 đến 5!");
+                    request.getRequestDispatcher(url).forward(request, response);
+                    return;
+                }
 
                 RequestDAO reqDao = new RequestDAO();
-                RequestDetailDTO detail = reqDao.getRequestDetailInfo(requestId);
+                RequestDTO requestInfo = reqDao.getRequestById1(requestId);
 
-                if (detail == null) {
-                    request.setAttribute("ERROR", "Không tìm thấy thông tin yêu cầu!");
+                if (requestInfo == null) {
+                    request.setAttribute("ERROR", "Không tìm thấy yêu cầu có mã: " + requestId);
+                    request.getRequestDispatcher(url).forward(request, response);
+                    return;
+                }
+
+                // Bạn có thể đặt serviceId là null hoặc 0 nếu không dùng nữa
+                FeedBackDTO feedback = new FeedBackDTO(
+                    requestId, stars, comment,
+                    0, // serviceId nếu không dùng nữa
+                    requestInfo.getCustomerId()
+                );
+                 FeedbackDAO fd = new FeedbackDAO();
+                boolean inserted = fd.insertFeedback(feedback);
+                if (inserted) {
+                     url = SUCCESS;
+                    return;
                 } else {
-                    FeedBackDTO feedback = new FeedBackDTO(
-                        requestId, stars, comment,
-                        detail.getServiceId(), detail.getCustomerId()
-                    );
-
-                    RequestDAO dao = new RequestDAO();
-                    boolean inserted = dao.insertFeedback(feedback);
-
-                    if (inserted) {
-                        request.setAttribute("SUCCESS", "Cảm ơn bạn đã đánh giá dịch vụ!");
-                        url = SUCCESS;
-                    } else {
-                        request.setAttribute("ERROR", "Không thể lưu đánh giá.");
-                    }
+                    request.setAttribute("ERROR", "Không thể lưu đánh giá.");
                 }
             } else {
                 request.setAttribute("ERROR", "Hành động không hợp lệ.");

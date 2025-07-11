@@ -171,7 +171,7 @@
                         <div class="dashboard-card">
                             <h4>📋 Quản lý đơn hàng</h4>
                             <p>Theo dõi và xử lý các yêu cầu cứu hộ</p>
-                            <a href="managerRequest.jsp">Xem đơn hàng</a>
+                            <a href="managerOrderMenu.jsp">Xem đơn hàng</a>
                         </div>
                         <div class="dashboard-card">
                             <h4>👷 Quản lý nhân viên</h4>
@@ -186,7 +186,7 @@
                         <div class="dashboard-card">
                             <h4>📞 Hỗ trợ khách hàng</h4>
                             <p>Xử lý khiếu nại và phản hồi</p>
-                            <a href="manager/support">Hỗ trợ</a>
+                            <a href="managerFeedback.jsp">Hỗ trợ</a>
                         </div>
                     </div>
                 </div>
@@ -230,7 +230,7 @@
                         <div class="dashboard-card">
                             <h4>📋 Đơn hàng của tôi</h4>
                             <p>Theo dõi trạng thái các yêu cầu</p>
-                            <a href="requestWaiting.jsp">Xem đơn hàng</a>
+                            <a href="requestCreated.jsp">Xem đơn hàng</a>
                         </div>
                         <div class="dashboard-card">
                             <h4>💳 Thanh toán</h4>

@@ -58,15 +58,28 @@
     <div class="service-grid">
         <% for (ServiceDTO s : services) { %>
             <div class="service-option">
-                <input type="checkbox" id="service_<%= s.getServiceId() %>" 
-                       name="serviceType" value="<%= s.getServiceId() %>" 
-                       data-price="<%= s.getPrice() %>">
-                <label for="service_<%= s.getServiceId() %>">
-                    
-                    <%= s.getServiceName() %><br>
-                    <small><%= s.getPrice() %> đ</small>
-                </label>
-            </div>
+    <input type="checkbox" id="service_<%= s.getServiceId() %>" 
+           name="serviceType" value="<%= s.getServiceId() %>" 
+           data-unit="<%= s.getUnitPrice() != 0 ? s.getUnitPrice() : 0 %>"
+           data-base="<%= s.getBasePrice() != 0 ? s.getBasePrice() : 0 %>">
+
+    <label for="service_<%= s.getServiceId() %>">
+        <%= s.getServiceName() %><br>
+        <small>Phí cố định: <%= s.getBasePrice() %> đ | Đơn giá: <%= s.getUnitPrice() %> đ</small>
+    </label>
+
+    <!-- Đặt input ra ngoài label để đảm bảo hiển thị -->
+    <div class="quantity-wrapper">
+    <label for="quantity_<%= s.getServiceId() %>">Số lượng:</label>
+    <input type="number"
+           name="quantity_<%= s.getServiceId() %>"
+           id="quantity_<%= s.getServiceId() %>"
+           class="quantity-input"
+           value="1"
+           min="1"
+           data-for="service_<%= s.getServiceId() %>">
+</div>
+</div>
         <% } %>
     </div>
 </div>
@@ -80,30 +93,53 @@
         <input type="hidden" name="totalPrice" id="totalPriceInput">
     </div>
 </div>
-
+    
 <script>
-    const checkboxes = document.querySelectorAll('input[name="serviceType"]');
-    const totalPriceSpan = document.getElementById('totalPrice');
-    const totalPriceInput = document.getElementById('totalPriceInput');
+window.addEventListener('DOMContentLoaded', () => {
+  const checkboxes = document.querySelectorAll('input[name="serviceType"]');
+  const totalPriceSpan = document.getElementById('totalPrice');
+  const totalPriceInput = document.getElementById('totalPriceInput');
 
-    function calculateTotal() {
-        let total = 0;
-        checkboxes.forEach(cb => {
-            if (cb.checked) {
-                total += parseFloat(cb.dataset.price);
-            }
-        });
-        totalPriceSpan.textContent = total.toFixed(2);
-        totalPriceInput.value = total.toFixed(2); // Gán giá trị cho input hidden
-    }
+  function calculateTotal() {
+    let total = 0;
 
     checkboxes.forEach(cb => {
-        cb.addEventListener('change', calculateTotal);
+      const serviceWrapper = cb.closest('.service-option');
+      const quantityWrapper = serviceWrapper.querySelector('.quantity-wrapper');
+      const quantityInput = serviceWrapper.querySelector('.quantity-input');
+
+      if (cb.checked) {
+        quantityWrapper.classList.add('active');
+        const base = parseFloat(cb.dataset.base) || 0;
+        const unit = parseFloat(cb.dataset.unit) || 0;
+        const quantity = parseInt(quantityInput.value) || 1;
+        total += base + unit * (quantity - 1); // hoặc unit * quantity nếu bạn muốn
+      } else {
+        quantityWrapper.classList.remove('active');
+      }
     });
 
-    // Gọi hàm một lần để cập nhật khi trang load lại
-    calculateTotal();
+    totalPriceSpan.textContent = total.toFixed(0);
+    totalPriceInput.value = total.toFixed(0);
+  }
+
+  // Khi checkbox thay đổi
+  checkboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
+
+  // Khi số lượng thay đổi, vẫn cần gọi calculateTotal
+  const quantityInputs = document.querySelectorAll('.quantity-input');
+  quantityInputs.forEach(inp => {
+    inp.addEventListener('input', calculateTotal);
+  });
+
+  // Tính toán ban đầu
+  calculateTotal();
+});
 </script>
+
+
+
+
 
                 
                 <div class="form-group">
@@ -153,6 +189,7 @@
                         Quay lại
                     </button>
                     </a>
+                    
                     <button type="submit" name="action" value="CustomerRequest" class="btn btn-primary">
                         Gửi Yêu Cầu
                     </button>

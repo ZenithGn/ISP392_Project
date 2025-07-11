@@ -19,6 +19,11 @@ public class FeedBackDTO {
     private String customerId;
     private String customerName;
 
+    public FeedBackDTO() {
+    }
+    
+    
+
     public FeedBackDTO(int feedbackId, String requestId, int rating, String comment, int serviceId, String serviceName, String customerId, String customerName) {
         this.feedbackId = feedbackId;
         this.requestId = requestId;

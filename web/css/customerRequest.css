@@ -1,14 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Jun 27, 2025, 12:23:08 PM
-    Author     : Khanh
-*/
-
-
 * {
     margin: 0;
     padding: 0;
@@ -93,17 +82,14 @@ body {
     flex-wrap: wrap;
     margin-top: 10px;
 }
-
 .urgency-option {
     flex: 1;
     min-width: 150px;
     position: relative;
 }
-
 .urgency-option input[type="radio"] {
     display: none;
 }
-
 .urgency-option label {
     display: block;
     padding: 20px;
@@ -117,31 +103,26 @@ body {
     position: relative;
     color: #333;
 }
-
 .urgency-option label span.icon {
     font-size: 1.8rem;
     display: block;
     margin-bottom: 10px;
 }
-
 .urgency-option input#low:checked + label {
     background-color: #28a745;
     color: white;
     border-color: #28a745;
 }
-
 .urgency-option input#medium:checked + label {
     background-color: #fd7e14;
     color: white;
     border-color: #fd7e14;
 }
-
 .urgency-option input#high:checked + label {
     background-color: #dc3545;
     color: white;
     border-color: #dc3545;
 }
-
 .urgency-option label:hover {
     transform: scale(1.03);
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
@@ -151,7 +132,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 20px;
 }
-.service-option input {
+.service-option input[type="checkbox"] {
     display: none;
 }
 .service-option label {
@@ -165,11 +146,38 @@ body {
     transition: 0.3s;
     font-weight: 600;
 }
-.service-option input:checked + label {
+.service-option input[type="checkbox"]:checked + label {
     border-color: #5e72e4;
     background: #5e72e4;
     color: white;
     transform: scale(1.05);
+}
+.quantity-wrapper {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.quantity-wrapper label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #666;
+}
+.quantity-input {
+    width: 70px;
+    padding: 8px 10px;
+    font-size: 15px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    background: #fff;
+}
+.quantity-input:focus {
+    border-color: #5e72e4;
+    box-shadow: 0 0 0 3px rgba(94, 114, 228, 0.2);
+    outline: none;
 }
 .service-icon {
     font-size: 1.8rem;
@@ -205,11 +213,9 @@ body {
 .btn-secondary:hover {
     background: #dee2e6;
 }
-
 .required {
     color: red;
 }
-
 .total-price-card {
     background: #fefefe;
     border: 2px dashed #5e72e4;
@@ -222,11 +228,9 @@ body {
     align-items: center;
     transition: 0.3s;
 }
-
 .total-price-card:hover {
     background: #f4f7ff;
 }
-
 .price-label {
     font-size: 1.1rem;
     font-weight: 600;
@@ -235,21 +239,24 @@ body {
     align-items: center;
     gap: 10px;
 }
-
 .price-icon {
     font-size: 1.5rem;
 }
-
 .price-amount {
     font-size: 1.8rem;
     font-weight: bold;
     color: #343a40;
 }
 
+ .quantity-wrapper {
+    display: none;
+    margin-top: 5px;
+  }
 
+  .quantity-wrapper.active {
+    display: block;
+  }
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-

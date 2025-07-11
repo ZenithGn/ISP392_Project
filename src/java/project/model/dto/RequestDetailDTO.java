@@ -24,10 +24,13 @@ private String urgency;
 private Timestamp createdAt;
 private String customerName;
 private String customerId;
+private String employeeName;
+private String imagePath;
+private String employeeNote;
     public RequestDetailDTO() {
     }
 
-    public RequestDetailDTO(String requestId, int serviceId, String serviceName, String notes, String status, String location, String urgency, Timestamp createdAt, String customerName) {
+    public RequestDetailDTO(String requestId, int serviceId, String serviceName, String notes, String status, String location, String urgency, Timestamp createdAt, String customerName, String customerId, String employeeName, String imagePath, String employeeNote) {
         this.requestId = requestId;
         this.serviceId = serviceId;
         this.serviceName = serviceName;
@@ -37,11 +40,10 @@ private String customerId;
         this.urgency = urgency;
         this.createdAt = createdAt;
         this.customerName = customerName;
-        
-    }
-
-    public RequestDetailDTO(String customerId) {
         this.customerId = customerId;
+        this.employeeName = employeeName;
+        this.imagePath = imagePath;
+        this.employeeNote = employeeNote;
     }
 
     public String getRequestId() {
@@ -124,7 +126,33 @@ private String customerId;
         this.customerId = customerId;
     }
 
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getEmployeeNote() {
+        return employeeNote;
+    }
+
+    public void setEmployeeNote(String employeeNote) {
+        this.employeeNote = employeeNote;
+    }
+
     
+
+   
 
    
 }
