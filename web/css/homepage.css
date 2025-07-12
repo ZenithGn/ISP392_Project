@@ -13,7 +13,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+    width: 100%;
     min-height: 60px;
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* màu gradient giống ảnh */
     color: white;
@@ -107,6 +107,7 @@ html {
 
 /* Navigation */
 .navbar {
+    width: 100%;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -1158,3 +1159,197 @@ html {
         width: 0;
     }
 }
+
+            .user-info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .role-badge {
+                padding: 4px 8px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            .role-owner { background-color: #ff6b6b; color: white; }
+            .role-manager { background-color: #4ecdc4; color: white; }
+            .role-employee { background-color: #45b7d1; color: white; }
+            .role-customer { background-color: #96ceb4; color: white; }
+            .logout-btn {
+                background-color: #ff4757;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                border-radius: 4px;
+                cursor: pointer;
+                text-decoration: none;
+                font-size: 14px;
+            }
+            .logout-btn:hover {
+                background-color: #ff3742;
+            }
+            .role-specific-content {
+                margin: 20px 0;
+                padding: 20px;
+                border-radius: 8px;
+                background-color: #f8f9fa;
+            }
+            .admin-panel {
+                background-color: #e3f2fd;
+                border-left: 4px solid #2196f3;
+            }
+            .manager-panel {
+                background-color: #f3e5f5;
+                border-left: 4px solid #9c27b0;
+            }
+            .employee-panel {
+                background-color: #e8f5e8;
+                border-left: 4px solid #4caf50;
+            }
+            .customer-panel {
+                background-color: #fff3e0;
+                border-left: 4px solid #ff9800;
+            }
+            .dashboard-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
+                margin-top: 15px;
+            }
+            .dashboard-card {
+                background: white;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+            .dashboard-card h4 {
+                margin: 0 0 10px 0;
+                color: #333;
+            }
+            .dashboard-card a {
+                text-decoration: none;
+                color: #007bff;
+                font-weight: bold;
+            }
+            .dashboard-card a:hover {
+                color: #0056b3;
+            }
+.menu-toggle {
+    font-size: 28px;
+    cursor: pointer;
+    display: none;
+    padding: 10px;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .sidebar {
+        display: none;
+        position: fixed;
+        top: 60px; /* chiều cao navbar */
+        left: 0;
+        background: #222;
+        width: 250px;
+        height: 100%;
+        padding: 20px;
+        z-index: 1000;
+    }
+
+    #sidebar-active:checked ~ .sidebar {
+        display: block;
+    }
+
+    .links-container a {
+        display: block;
+        color: white;
+        padding: 10px 0;
+    }
+}
+.menu-toggle {
+  font-size: 28px;
+  cursor: pointer;
+  padding: 10px;
+  color: black; /* dễ thấy trên navbar */
+  background: #f0f0f0;
+  border-radius: 6px;
+  display: block; /* luôn hiển thị để test */
+  z-index: 1001;
+}
+
+/* Bỏ display: none trong .sidebar ở mobile */
+.sidebar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 250px;
+  height: calc(100vh - 80px);
+  background: #4da6ff;
+  color: #2196f3;
+  padding: 20px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+/* Khi checkbox được chọn → sidebar trượt vào */
+#sidebar-active:checked ~ .sidebar {
+  transform: translateX(0);
+}
+
+/* Ẩn nút ☰ ở desktop */
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1000;
+    padding: 1rem 2rem;
+}
+.left-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* khoảng cách giữa ☰ và logo */
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Hiển thị menu-toggle */
+.menu-toggle {
+    font-size: 28px;
+    padding: 10px 15px;
+    color: white;
+    background-color: #007bff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block !important;   /* ⚠️ luôn hiển thị */
+    margin-right: 10px;
+    z-index: 1001;
+}
+
+/* Ẩn menu-toggle ở desktop */
+@media (min-width: 768px) {
+    .menu-toggle {
+        display: none;
+    }
+}
+
+

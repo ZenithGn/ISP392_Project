@@ -31,92 +31,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>MRS - Dịch vụ cứu hộ xe máy</title>
         <link rel="stylesheet" href="css/homepage.css" />
-        <style>
-            .user-info {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            .role-badge {
-                padding: 4px 8px;
-                border-radius: 12px;
-                font-size: 12px;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-            .role-owner { background-color: #ff6b6b; color: white; }
-            .role-manager { background-color: #4ecdc4; color: white; }
-            .role-employee { background-color: #45b7d1; color: white; }
-            .role-customer { background-color: #96ceb4; color: white; }
-            .logout-btn {
-                background-color: #ff4757;
-                color: white;
-                border: none;
-                padding: 8px 15px;
-                border-radius: 4px;
-                cursor: pointer;
-                text-decoration: none;
-                font-size: 14px;
-            }
-            .logout-btn:hover {
-                background-color: #ff3742;
-            }
-            .role-specific-content {
-                margin: 20px 0;
-                padding: 20px;
-                border-radius: 8px;
-                background-color: #f8f9fa;
-            }
-            .admin-panel {
-                background-color: #e3f2fd;
-                border-left: 4px solid #2196f3;
-            }
-            .manager-panel {
-                background-color: #f3e5f5;
-                border-left: 4px solid #9c27b0;
-            }
-            .employee-panel {
-                background-color: #e8f5e8;
-                border-left: 4px solid #4caf50;
-            }
-            .customer-panel {
-                background-color: #fff3e0;
-                border-left: 4px solid #ff9800;
-            }
-            .dashboard-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 15px;
-                margin-top: 15px;
-            }
-            .dashboard-card {
-                background: white;
-                padding: 15px;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                text-align: center;
-            }
-            .dashboard-card h4 {
-                margin: 0 0 10px 0;
-                color: #333;
-            }
-            .dashboard-card a {
-                text-decoration: none;
-                color: #007bff;
-                font-weight: bold;
-            }
-            .dashboard-card a:hover {
-                color: #0056b3;
-            }
-        </style>
+       
     </head>
     <body>
         <div class="homepage">
             <!-- Navbar -->
+            <input type="checkbox" id="sidebar-active" style="display: none;">
+           
+
             <header class="navbar">
+                 <div class="left-group">
+                <label for="sidebar-active" class="menu-toggle">☰</label>
                 <div class="logo">
                     <img src="images/logo1.jpg" class="logo-img" />
                 </div>
+                  </div>
                 <nav class="nav-links">
                     <% if (isLoggedIn) {%>
                     <div class="user-info">
@@ -132,18 +61,13 @@
                     <a href="#" class="active">Home</a>
                 </nav>
             </header>
-
-            <div class="sidebar">
-                <input type="checkbox" id="sidebar-active">
-                <label for="sidebar-active" class="open-sidebar-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#e3e3e3"><path d="M160-240q-17 0-28.5-11.5T120-280q0-17 11.5-28.5T160-320h640q17 0 28.5 11.5T840-280q0 17-11.5 28.5T800-240H160Zm0-200q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520h640q17 0 28.5 11.5T840-480q0 17-11.5 28.5T800-440H160Zm0-200q-17 0-28.5-11.5T120-680q0-17 11.5-28.5T160-720h640q17 0 28.5 11.5T840-680q0 17-11.5 28.5T800-640H160Z"/></svg>
-                </label>
+            <!-- Sidebar -->
+            <div class="sidebar">                
+             
                 <div class="links-container">
-                    <label for="sidebar-active" class="close-sidebar-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#e3e3e3"><path d="M480-424 284-228q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536-480l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480-424Z"/></svg>
-                    </label>
+                
                     <ul>
-                        <a href="#" class="active">Home</a>
+                        <a href="homepage.jsp" class="active">Home</a>
                         <a href="menu.jsp">Service</a>
                         <a href="aboutUs.jsp">About Us</a>
 
