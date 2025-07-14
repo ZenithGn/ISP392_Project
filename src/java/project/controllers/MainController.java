@@ -42,6 +42,14 @@ public class MainController extends HttpServlet {
     private static final String DELETE_EMPLOYEE_CONTROLLER = "DeleteEmployeeController";
     private static final String SEARCH_EMPLOYEE = "searchEmployee";
     private static final String SEARCH_EMPLOYEE_CONTROLLER = "SearchEmployeeController";
+    private static final String VERIFY_RECAPTCHA = "VerifyRecaptcha";
+    private static final String VERIFY_RECAPTCHA_CONTROLLER = "VerifyRecaptchaController";
+    private static final String FORGOT_PASSWORD = "ForgotPassword";
+    private static final String FORGOT_PASSWORD_CONTROLLER = "ForgotPasswordController";
+    private static final String VERIFY_OTP = "VerifyOtp";
+    private static final String VERIFY_OTP_CONTROLLER = "VerifyOtpController";
+    private static final String RESET_PASSWORD = "ResetPassword";
+    private static final String RESET_PASSWORD_CONTROLLER = "ResetPasswordController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -75,6 +83,14 @@ public class MainController extends HttpServlet {
                 url = DELETE_EMPLOYEE_CONTROLLER;
             } else if (SEARCH_EMPLOYEE.equals(action)) {
                 url = SEARCH_EMPLOYEE_CONTROLLER;
+            } else if (VERIFY_RECAPTCHA.equals(action)) {
+                url = VERIFY_RECAPTCHA_CONTROLLER;
+            } else if (FORGOT_PASSWORD.equals(action)) {
+                url = FORGOT_PASSWORD_CONTROLLER;
+            } else if (VERIFY_OTP.equals(action)) {
+                url = VERIFY_OTP_CONTROLLER;
+            } else if (RESET_PASSWORD.equals(action)) {
+                url = RESET_PASSWORD_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
