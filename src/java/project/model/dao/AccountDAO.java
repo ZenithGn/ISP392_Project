@@ -7,6 +7,8 @@ package project.model.dao;
 
 import project.model.dto.AccountDTO;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import project.utils.DBUtils;
 
 /**
@@ -233,4 +235,209 @@ public class AccountDAO {
         }
         return customerId;
     }
+    
+    public List<AccountDTO> getAllManagers() throws Exception {
+    List<AccountDTO> list = new ArrayList<>();
+    Connection conn = DBUtils.getConnection();
+   String sql = 
+    "SELECT a.account_id, a.username, a.isregistered, a.role, " +
+    "m.manager_nickName, m.phone, m.email " +  // <-- dấu cách sau dấu phẩy
+    "FROM Account a " +                       // <-- dấu cách cuối mỗi dòng
+    "LEFT JOIN Manager m ON a.account_id = m.account_id " +
+    "WHERE a.role = 'manager'";
+    
+
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ResultSet rs = ps.executeQuery();
+
+    while (rs.next()) {
+        AccountDTO acc = new AccountDTO();
+        acc.setId(rs.getString("account_id"));
+        acc.setUserName(rs.getString("username"));
+        acc.setIsRegistered(rs.getBoolean("isregistered"));
+        acc.setRole(rs.getString("role"));
+        acc.setNickName(rs.getString("manager_nickName")); // <-- thêm 3 dòng này
+        acc.setPhone(rs.getString("phone"));
+        acc.setEmail(rs.getString("email"));
+        list.add(acc);
+    }
+
+    rs.close();
+    ps.close();
+    conn.close();
+    return list;
+}
+
+    // 2. Tạo mới manager
+   public boolean createManager(String username, String password, String nickname, String phone, String email) throws Exception {
+    Connection conn = null;
+    PreparedStatement accountStmt = null;
+    PreparedStatement managerStmt = null;
+    ResultSet rs = null;
+
+    boolean success = false;
+
+    try {
+        conn = DBUtils.getConnection();
+        conn.setAutoCommit(false); // Giao dịch để rollback nếu có lỗi
+
+        // 1. Thêm vào bảng Account
+        String insertAccountSQL = "INSERT INTO Account (username, password, isregistered, role) VALUES (?, ?, ?, ?)";
+        accountStmt = conn.prepareStatement(insertAccountSQL, Statement.RETURN_GENERATED_KEYS);
+        accountStmt.setString(1, username);
+        accountStmt.setString(2, password);
+        accountStmt.setBoolean(3, false); // isregistered = false khi mới tạo
+        accountStmt.setString(4, "manager");
+        int affected = accountStmt.executeUpdate();
+
+        if (affected == 0) {
+            throw new SQLException("Creating account failed, no rows affected.");
+        }
+
+        rs = accountStmt.getGeneratedKeys();
+        int generatedAccountId = -1;
+        if (rs.next()) {
+            generatedAccountId = rs.getInt(1);
+        } else {
+            throw new SQLException("Creating account failed, no ID obtained.");
+        }
+
+        // 2. Thêm vào bảng Manager
+        String insertManagerSQL = "INSERT INTO Manager (manager_nickName, phone, email, account_id) VALUES (?, ?, ?, ?)";
+        managerStmt = conn.prepareStatement(insertManagerSQL);
+        managerStmt.setString(1, nickname);
+        managerStmt.setString(2, phone);
+        managerStmt.setString(3, email);
+        managerStmt.setInt(4, generatedAccountId);
+        managerStmt.executeUpdate();
+
+        conn.commit(); // Nếu cả hai câu lệnh đều thành công thì commit
+        success = true;
+
+    } catch (Exception e) {
+        if (conn != null) {
+            try {
+                conn.rollback(); // Nếu có lỗi thì rollback toàn bộ
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        throw new Exception("Failed to create manager: " + e.getMessage(), e);
+    } finally {
+        if (rs != null) rs.close();
+        if (accountStmt != null) accountStmt.close();
+        if (managerStmt != null) managerStmt.close();
+        if (conn != null) conn.close();
+    }
+
+    return success;
+}
+
+
+    // 3. Cập nhật manager
+    public boolean updateManager(AccountDTO acc, String nickname, String phone, String email) throws Exception {
+    Connection conn = null;
+    PreparedStatement psAccount = null;
+    PreparedStatement psManager = null;
+    boolean success = false;
+
+    try {
+        conn = DBUtils.getConnection();
+        conn.setAutoCommit(false); // Bắt đầu transaction
+
+        // Cập nhật bảng Account
+        String sqlAccount = "UPDATE Account SET username=?, password=?, isregistered=? WHERE account_id=?";
+        psAccount = conn.prepareStatement(sqlAccount);
+        psAccount.setString(1, acc.getUserName());
+        psAccount.setString(2, acc.getPassword());
+        psAccount.setBoolean(3, acc.getIsRegistered());
+        psAccount.setString(4, acc.getId());
+        psAccount.executeUpdate();
+
+        // Cập nhật bảng Manager
+        String sqlManager = "UPDATE Manager SET manager_nickName=?, phone=?, email=? WHERE account_id=?";
+        psManager = conn.prepareStatement(sqlManager);
+        psManager.setString(1, nickname);
+        psManager.setString(2, phone);
+        psManager.setString(3, email);
+        psManager.setInt(4, Integer.parseInt(acc.getId()));
+        psManager.executeUpdate();
+
+        conn.commit();
+        success = true;
+
+    } catch (Exception e) {
+        if (conn != null) conn.rollback(); // Nếu lỗi, rollback
+        throw new Exception("Error updating manager: " + e.getMessage(), e);
+    } finally {
+        if (psAccount != null) psAccount.close();
+        if (psManager != null) psManager.close();
+        if (conn != null) conn.close();
+    }
+
+    return success;
+}
+
+
+
+   public boolean deleteManager(String accountId) throws Exception {
+    Connection conn = null;
+    PreparedStatement psManager = null;
+    PreparedStatement psAccount = null;
+    boolean success = false;
+
+    try {
+        conn = DBUtils.getConnection();
+        conn.setAutoCommit(false); // transaction
+
+        // Xoá ở bảng Manager trước
+        String sqlManager = "DELETE FROM Manager WHERE account_id=?";
+        psManager = conn.prepareStatement(sqlManager);
+        psManager.setString(1, accountId);
+        psManager.executeUpdate();
+
+        // Sau đó xoá ở bảng Account
+        String sqlAccount = "DELETE FROM Account WHERE account_id=? AND role='manager'";
+        psAccount = conn.prepareStatement(sqlAccount);
+        psAccount.setString(1, accountId);
+        psAccount.executeUpdate();
+
+        conn.commit();
+        success = true;
+
+    } catch (Exception e) {
+        if (conn != null) conn.rollback();
+        throw new Exception("Error deleting manager: " + e.getMessage(), e);
+    } finally {
+        if (psManager != null) psManager.close();
+        if (psAccount != null) psAccount.close();
+        if (conn != null) conn.close();
+    }
+
+    return success;
+}
+   
+   public boolean createManagerInfo(String nickname, String phone, String email, int accountId) throws Exception {
+    Connection conn = null;
+    PreparedStatement ptm = null;
+    boolean success = false;
+
+    try {
+        conn = DBUtils.getConnection();
+        String sql = "INSERT INTO Manager (manager_nickName, phone, email, account_id) VALUES (?, ?, ?, ?)";
+        ptm = conn.prepareStatement(sql);
+        ptm.setString(1, nickname);
+        ptm.setString(2, phone);
+        ptm.setString(3, email);
+        ptm.setInt(4, accountId);
+
+        int result = ptm.executeUpdate();
+        success = result > 0;
+    } finally {
+        if (ptm != null) ptm.close();
+        if (conn != null) conn.close();
+    }
+
+    return success;
+}
 }

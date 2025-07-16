@@ -144,7 +144,7 @@
                         <div class="dashboard-card">
                             <h4>👥 Quản lý nhân viên</h4>
                             <p>Xem và quản lý tất cả nhân viên</p>
-                            <a href="owner/employees">Xem chi tiết</a>
+                            <a href="manageManager.jsp">Xem chi tiết</a>
                         </div>
                         <div class="dashboard-card">
                             <h4>📊 Báo cáo doanh thu</h4>

@@ -15,18 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import project.model.dao.AccountDAO;
-import project.model.dao.RequestDAO;
 import project.model.dto.AccountDTO;
-import project.model.dto.RequestDetailDTO;
 
 /**
  *
  * @author Khanh
  */
-@WebServlet(name = "ManagerAllTaskController", urlPatterns = {"/ManagerAllTaskController"})
-public class ManagerAllTaskController extends HttpServlet {
+@WebServlet(name = "ManageManagerController", urlPatterns = {"/ManageManagerController"})
+public class ManageManagerController extends HttpServlet {
 
-   
     private static final String ERROR = "manageManager.jsp";
     private static final String SUCCESS = "manageManager.jsp";
 

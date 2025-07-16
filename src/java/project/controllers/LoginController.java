@@ -50,6 +50,7 @@ public class LoginController extends HttpServlet {
                 switch (account.getRole()) {
                     case "owner":
                     case "manager":
+                        
                     case "customer":
                         AccountDAO customerDAO = new AccountDAO();
                         String customerId = customerDAO.getCustomerIdByAccountId(account.getId()); // account.getId() là account_id

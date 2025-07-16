@@ -7,6 +7,7 @@
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/ManagerRequestController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/homepage.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/EmployeeTaskController.java</file>
+            <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/ManageManagerActionController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/aboutUs.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/RequestWaitingController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/menu.css</file>
@@ -25,6 +26,7 @@
             <file>file:/D:/Code%20github/ISP392_Project/web/payment.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/employeeTask.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/rate.css</file>
+            <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/ManageManagerController.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/forgotPassword.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dto/FeedBackDTO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/login.jsp</file>
@@ -34,6 +36,7 @@
             <file>file:/D:/Code%20github/ISP392_Project/web/images/menu1.png</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/css/managerAllTask.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/managerFeedback.jsp</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/css/manageManager.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/model/dto/RequestDTO.java</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/requestWaiting.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/controllers/LoginController.java</file>
@@ -55,6 +58,7 @@
             <file>file:/D:/Code%20github/ISP392_Project/web/css/requestWaiting.css</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/thankyou.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/src/java/project/utils/DBUtils.java</file>
+            <file>file:/D:/Code%20github/ISP392_Project/web/manageManager.jsp</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/honda-head.jpg</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/register123.png</file>
             <file>file:/D:/Code%20github/ISP392_Project/web/images/map-pin.png</file>
