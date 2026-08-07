@@ -1,0 +1,36 @@
+name: SoulAnchor
+version: 1.0.4
+main: vn.haohan.soulanchor.SoulAnchorPlugin
+api-version: '1.21'
+author: HaoHanSMP
+description: Personal Soul Anchor teleport network.
+commands:
+  soulanchor:
+    description: Manage Soul Anchors.
+    usage: /soulanchor <give|list|rename|share|reload>
+    aliases: [sa]
+permissions:
+  soulanchor.use:
+    default: true
+  soulanchor.place:
+    default: true
+  soulanchor.break.own:
+    default: true
+  soulanchor.rename:
+    default: true
+  soulanchor.share:
+    default: true
+  soulanchor.admin:
+    default: op
+  soulanchor.admin.give:
+    default: op
+  soulanchor.admin.reload:
+    default: op
+  soulanchor.bypass.cost:
+    default: op
+  soulanchor.bypass.cooldown:
+    default: op
+  soulanchor.bypass.warmup:
+    default: op
+  soulanchor.limit.unlimited:
+    default: false

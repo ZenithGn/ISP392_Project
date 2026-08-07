@@ -1,0 +1,77 @@
+limits:
+  default: 3
+  permission-based: true
+
+item:
+  id: haohansmp:soul_anchor
+  material: BARRIER
+  item-model: haohansmp:soul_anchor
+  placed-block: BARRIER
+  custom-model-data: 910001
+  display-name: "&b&lSoul Anchor"
+  lore:
+    - "&7A relic that binds a soul path to the world."
+    - "&7Place it to create a teleport anchor."
+    - ""
+    - "&fID: &7haohansmp:soul_anchor"
+    - "&fLimit: &b3 Soul Anchors"
+    - "&fRequirement: &a10 levels / 1000 blocks"
+    - "&fXP charge: &e8 points / required level"
+    - "&fEcho Shard: &b1 beyond 2000 blocks"
+
+recipe:
+  enabled: true
+  discover-automatically: true
+
+distance:
+  blocks-per-tier: 1000
+  levels-per-tier: 10
+  minimum-level-cost: 10
+
+teleport:
+  echo-shard-cost: 1
+  echo-shard-free-distance: 2000
+  experience-points-per-required-level: 8
+  warmup-seconds: 3
+  cooldown-seconds: 30
+  movement-tolerance: 0.5
+
+cross-dimension:
+  enabled: true
+  level-cost: 30
+  echo-shard-cost: 1
+
+echo-shard-sources:
+  fishing:
+    enabled: true
+    base-chance: 0.01
+    luck-bonus-per-level: 0.0025
+  warden:
+    enabled: true
+    drop-chance: 0.15
+    amount: 1
+
+safe-location:
+  horizontal-radius: 3
+  vertical-radius: 4
+
+worlds:
+  mode: blacklist
+  list:
+    - world_event
+    - world_resource
+
+breaking:
+  drop-item: true
+
+visuals:
+  display-material: STONE
+  scale-x: 1.0
+  scale-y: 0.877
+  scale-z: 1.0
+  interaction-width: 1.2
+  interaction-height: 1.1
+  idle-particles: true
+  idle-particle-interval-ticks: 40
+  idle-particle-batch-size: 32
+  particle-view-distance: 24
